@@ -1,4 +1,4 @@
-import ProductInterface from "../interfaces/Product";
+import ProductInterface from "../interfaces/ProductInterface";
 import Product from "./Product";
 
 interface Prop {
@@ -8,13 +8,13 @@ interface Prop {
 const ProductList = ({ productList }: Prop) => {
   return (
     <>
-      <ul className="list-group list-group-horizontal">
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 m-0">
         {productList.map((product) => (
-          <li key={product.id} className="list-group-item">
+          <div key={product.id} className="col p-0">
             <Product product={product} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import ProductInterface from "../interfaces/Product";
+import ProductInterface from "../interfaces/ProductInterface";
 
 interface Props {
   product: ProductInterface;
@@ -6,22 +6,20 @@ interface Props {
 
 const Product = ({ product }: Props) => {
   return (
-    <div className="Product">
-      <div className="ProductDesc">
-        <h3>{product.name}</h3>
+    <div className="card mx-3 my-2">
+      <img
+        className="card-img-top"
+        style={{ height: 75, width: 75 }}
+        src={product.image}
+        alt={product.name}
+      />
+      <div className="card-body">
+        <h3 className="card-title">{product.name}</h3>
+        <p className="card-text">{product.describe}</p>
         <p>Price: {product.price} PLN</p>
-
-        <p>Count: 1</p>
-        <button onClick={() => {}}>Add</button>
-
-        <button onClick={() => {}}>button</button>
-      </div>
-      <div className="ProductImg">
-        <img
-          style={{ height: 75, width: 75 }}
-          src={product.image}
-          alt={product.name}
-        />
+        <button className="btn btn-primary" onClick={() => {}}>
+          Buy
+        </button>
       </div>
     </div>
   );
