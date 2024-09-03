@@ -1,0 +1,8 @@
+.sidebar-ligth{
+    background-color: rgb(185, 207, 103);
+    z-index: 0;
+}
+
+.products-layout-content{
+    margin-left: clamp(75px, 15%, 200px);
+}

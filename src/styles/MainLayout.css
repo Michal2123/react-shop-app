@@ -1,0 +1,10 @@
+.main-layout-container{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.main-layout-main{
+    margin-top: 75px;
+    flex: 1;
+}

@@ -2,10 +2,8 @@
 .navbar-dark{
     background-color: rgb(118, 120, 47);
     color: white;
-    height: 100;
 }
 
 .navbar-light{
     background-color: rgb(224, 225, 191);
-    height: 100;
 }
