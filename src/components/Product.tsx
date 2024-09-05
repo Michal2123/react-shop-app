@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import ProductInterface from "../interfaces/ProductInterface";
 
-interface Props {
+interface Prop {
   product: ProductInterface;
+  onBuyClick(product: ProductInterface): void;
 }
 
-const Product = ({ product }: Props) => {
+const Product = ({ product, onBuyClick }: Prop) => {
   return (
     <div className="card shadow-sm mx-3 my-2">
       <div className="row g-0 align-items-center">
@@ -24,11 +26,9 @@ const Product = ({ product }: Props) => {
             <p className="card-text">{product.describe}</p>
             <p>Price: {product.price} PLN</p>
             <div className="d-flex justify-content-between">
-              <button className="btn btn-primary" onClick={() => {}}>
-                Buy
-              </button>
+              <Button onClick={() => onBuyClick(product)}>Buy</Button>
               <Link to={`${product.id}`} className="">
-                <button className="btn btn-secondary">Details</button>
+                <Button className="btn btn-secondary">Details</Button>
               </Link>
             </div>
           </div>

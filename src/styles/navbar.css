@@ -10,21 +10,18 @@
 
 .btn-nav-search  {
     z-index: 1;
+    width: 90px;
     color: #212529;
     background-color: white;
     border-color: black
 }
 
 .btn-nav-search:hover  {
-    color: #212529;
     background-color: rgb(245, 247, 247);
-    border-color: black
 }
 
 .btn-nav-search:hover:active  {
-    color: #212529;
     background-color: rgb(240, 238, 238);
-    border-color: black
 }
 
 .input-nav-search {
@@ -44,10 +41,9 @@
    
 }
 
-.link-nav:hover{
+.link-nav-active-page, .link-nav:hover{
     background-color: rgb(245, 247, 247);
     border: 1px solid rgba(0, 0, 0, 1);
-
 }
 
 .link-nav:hover:active{
@@ -63,9 +59,8 @@
     -ms-transition: .15s; 
 }
 
-.icon-nav:hover{
+.icon-nav-active-page, .icon-nav:hover{
     filter: brightness(0) invert(1);
-    color: white;
 }
 
 .cart-count-nav{

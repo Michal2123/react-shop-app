@@ -2,8 +2,19 @@ import { Link } from "react-router-dom";
 import { Navbar, Form, InputGroup, Button, Image } from "react-bootstrap";
 import logo from "../assets/images/logo.png";
 import cartIcon from "../assets/icons/cart-icon.png";
-const TopBar = () => {
-  const cartCount = 1;
+import searchBtnIcon from "../assets/icons/search-btn-icon.png";
+import { useContext, useState } from "react";
+import { cartContext } from "../layouts/MainLayout";
+
+const NavigationBar = () => {
+  const { cartList } = useContext(cartContext);
+  const [currentPage, setCuttentPage] = useState("home");
+  const cartCount = cartList.reduce((partialSum, a) => partialSum + a.count, 0);
+
+  function handleNavLinkClick(page: string) {
+    setCuttentPage(page);
+  }
+
   return (
     <Navbar
       className="justify-content-between shadow-sm q"
@@ -11,7 +22,11 @@ const TopBar = () => {
       style={{ height: 75 }}
     >
       <Navbar.Brand className="d-flex w-25 mx-0 p-0">
-        <Link to={"/"} className=" mx-auto mb-0 align-middle">
+        <Link
+          to={"/"}
+          className=" mx-auto mb-0 align-middle"
+          onClick={() => handleNavLinkClick("home")}
+        >
           <Image src={logo} style={{ height: "150px" }} />
         </Link>
       </Navbar.Brand>
@@ -23,25 +38,37 @@ const TopBar = () => {
             type="text"
             className="shadow-none rounded-0 input-nav-search"
           />
-          <Button className="rounded-0 btn-nav-search ">Search</Button>
+          <Button className="rounded-0 btn-nav-search ">
+            <Image src={searchBtnIcon} fluid style={{ width: "25px" }} />
+          </Button>
         </InputGroup>
       </Form>
       <div className="d-flex w-25 h-75 me-2">
         <Link
           to={"/products"}
-          className=" link-nav mx-1 px-2 pt-1 mb-0  align-middle "
+          className={`link-nav ${
+            currentPage === "products" && "link-nav-active-page"
+          } mx-1 px-2 pt-1 mb-0  align-middle`}
+          onClick={() => handleNavLinkClick("products")}
         >
           Products
         </Link>
         <Link
           to={"/cart"}
           className={`${
-            cartCount > 0 ? "position-relative" : ""
+            cartCount > 0 && "position-relative"
           } mx-auto mb-0 pt-1 align-middle `}
+          onClick={() => handleNavLinkClick("cart")}
         >
-          <Image src={cartIcon} className="icon-nav" fluid />
-          {cartCount > 0 ? (
-            <div className=" cart-count-nav position-absolute bottom-0 end-0">
+          <Image
+            src={cartIcon}
+            className={`icon-nav  ${
+              currentPage === "cart" && "icon-nav-active-page"
+            }`}
+            fluid
+          />
+          {cartCount > 0 && (
+            <div className=" cart-count-nav  position-absolute bottom-0 end-0">
               <div
                 style={
                   cartCount > 99
@@ -52,9 +79,15 @@ const TopBar = () => {
                 {cartCount}
               </div>
             </div>
-          ) : null}
+          )}
         </Link>
-        <Link to={"/"} className=" link-nav mx-1 px-2 pt-1 mb-0  align-middle ">
+        <Link
+          to={"/"}
+          className={`link-nav ${
+            currentPage === "singIn" && "link-nav-active-page"
+          } mx-1 px-2 pt-1 mb-0  align-middle`}
+          onClick={() => handleNavLinkClick("singIn")}
+        >
           Sing in
         </Link>
       </div>
@@ -62,4 +95,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default NavigationBar;

@@ -26,7 +26,7 @@ function App() {
           path="/products/:id"
           element={<ProductPage productList={productList} />}
         />
-        <Route path="/cart" element={<CartPage productList={productList} />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
     )
   );
