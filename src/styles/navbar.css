@@ -7,3 +7,81 @@
 .navbar-light{
     background-color: rgb(224, 225, 191);
 }
+
+.btn-nav-search  {
+    z-index: 1;
+    color: #212529;
+    background-color: white;
+    border-color: black
+}
+
+.btn-nav-search:hover  {
+    color: #212529;
+    background-color: rgb(245, 247, 247);
+    border-color: black
+}
+
+.btn-nav-search:hover:active  {
+    color: #212529;
+    background-color: rgb(240, 238, 238);
+    border-color: black
+}
+
+.input-nav-search {
+    border: 1px solid black;
+}
+
+.link-nav {
+    color: black;
+    font-size: x-large;
+    padding: 2px,5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+    transition: .15s;
+    -webkit-transition: .15s;
+    -ms-transition: .15s; 
+   
+}
+
+.link-nav:hover{
+    background-color: rgb(245, 247, 247);
+    border: 1px solid rgba(0, 0, 0, 1);
+
+}
+
+.link-nav:hover:active{
+    background-color: rgb(240, 238, 238);
+    border: 1px solid rgba(0, 0, 0, 1);
+
+}
+
+.icon-nav{
+    max-width: 35px;
+    transition: .15s;
+    -webkit-transition: .15s;
+    -ms-transition: .15s; 
+}
+
+.icon-nav:hover{
+    filter: brightness(0) invert(1);
+    color: white;
+}
+
+.cart-count-nav{
+    background-color: rgb(0, 154, 110);
+    text-align: center;
+    padding-bottom: 5px;
+    vertical-align: middle;
+    margin-right: -4px;
+    width: 16px;
+    height: 16px;
+    color: white;
+    border: 1px, solid, transparent;
+    border-radius: 8px;
+}
+
+.cart-count-nav div{
+    font-weight: 600;
+
+}
