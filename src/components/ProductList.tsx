@@ -1,26 +1,21 @@
 import { useContext } from "react";
 import ProductInterface from "../interfaces/ProductInterface";
 import Product from "./Product";
-import { cartContext } from "../layouts/MainLayout";
+import { CartContext, UpdateCartContext } from "../context/CartContext";
+import { CartActionKind } from "../enum/CartEnum";
 
 interface Prop {
   productList: ProductInterface[];
 }
 
 const ProductList = ({ productList }: Prop) => {
-  const { cartList, updateCartList } = useContext(cartContext);
+  const { cartList } = useContext(CartContext);
+  const { dispatch } = useContext(UpdateCartContext);
+
   function handleClickBuy(product: ProductInterface) {
     cartList.find((a) => a.product.id === product.id)
-      ? updateCartList((draft) => {
-          const item = draft.find((a) => a.product.id === product.id);
-          item && item.count++;
-        })
-      : updateCartList((draft) => {
-          draft.push({
-            product,
-            count: 1,
-          });
-        });
+      ? dispatch({ type: CartActionKind.INCRESECOUNT, product })
+      : dispatch({ type: CartActionKind.ADD, product });
   }
 
   return (

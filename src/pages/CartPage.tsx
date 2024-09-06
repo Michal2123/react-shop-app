@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import CartItem from "../components/CartItem";
 import { Button } from "react-bootstrap";
-import { cartContext } from "../layouts/MainLayout";
+import { CartContext } from "../context/CartContext";
 
 const CartPage = () => {
-  const { cartList, updateCartList } = useContext(cartContext);
+  const { cartList } = useContext(CartContext);
 
   return (
     <>
@@ -12,12 +12,7 @@ const CartPage = () => {
         <div className="card w-50 mx-auto my-5">
           <div className="card-body row row-col-2 row-col-md-2 row-col-lg-3">
             {cartList.map(({ product, count }) => (
-              <CartItem
-                key={product.id}
-                product={product}
-                count={count}
-                updateCartList={updateCartList}
-              />
+              <CartItem key={product.id} product={product} count={count} />
             ))}
             <h5 style={{ textAlign: "end" }}>Price: 555$</h5>
             <Button

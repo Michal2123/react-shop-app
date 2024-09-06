@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Navbar, Form, InputGroup, Button, Image } from "react-bootstrap";
 import logo from "../assets/images/logo.png";
 import cartIcon from "../assets/icons/cart-icon.png";
 import searchBtnIcon from "../assets/icons/search-btn-icon.png";
 import { useContext, useState } from "react";
-import { cartContext } from "../layouts/MainLayout";
+import { CartContext } from "../context/CartContext";
 
 const NavigationBar = () => {
-  const { cartList } = useContext(cartContext);
+  const { cartList } = useContext(CartContext);
   const [currentPage, setCuttentPage] = useState("home");
   const cartCount = cartList.reduce((partialSum, a) => partialSum + a.count, 0);
 
@@ -44,16 +44,18 @@ const NavigationBar = () => {
         </InputGroup>
       </Form>
       <div className="d-flex w-25 h-75 me-2">
-        <Link
+        <NavLink
           to={"/products"}
-          className={`link-nav ${
-            currentPage === "products" && "link-nav-active-page"
-          } mx-1 px-2 pt-1 mb-0  align-middle`}
+          className={({ isActive }) =>
+            `link-nav ${
+              isActive && "link-nav-active-page"
+            } mx-1 px-2 pt-1 mb-0  align-middle`
+          }
           onClick={() => handleNavLinkClick("products")}
         >
           Products
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to={"/cart"}
           className={`${
             cartCount > 0 && "position-relative"
@@ -80,16 +82,18 @@ const NavigationBar = () => {
               </div>
             </div>
           )}
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to={"/"}
-          className={`link-nav ${
-            currentPage === "singIn" && "link-nav-active-page"
-          } mx-1 px-2 pt-1 mb-0  align-middle`}
+          className={(isActive) =>
+            `link-nav ${
+              isActive && "link-nav-active-page"
+            } mx-1 px-2 pt-1 mb-0  align-middle`
+          }
           onClick={() => handleNavLinkClick("singIn")}
         >
           Sing in
-        </Link>
+        </NavLink>
       </div>
     </Navbar>
   );

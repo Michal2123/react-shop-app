@@ -1,38 +1,29 @@
-import { DraftFunction } from "use-immer";
 import ProductInterface from "../interfaces/ProductInterface";
 import { Image } from "react-bootstrap";
-
-interface CartList {
-  product: ProductInterface;
-  count: number;
-}
+import { UpdateCartContext } from "../context/CartContext";
+import { useContext } from "react";
+import { CartActionKind } from "../enum/CartEnum";
 
 interface Prop {
   product: ProductInterface;
   count: number;
-  updateCartList: (arg: CartList[] | DraftFunction<CartList[]>) => void;
 }
 
-const CartItem = ({ product, count, updateCartList }: Prop) => {
-  function handleDeleteClick(id: number) {
-    updateCartList((draft) => draft.filter((item) => item.product.id !== id));
+const CartItem = ({ product, count }: Prop) => {
+  const { dispatch } = useContext(UpdateCartContext);
+
+  function handleDeleteClick() {
+    dispatch({ type: CartActionKind.DELETE, product });
   }
 
-  function handleIncreseClick(id: number) {
-    updateCartList((draft) => {
-      draft.map((item) => item.product.id === id && item.count++);
-    });
+  function handleIncreseClick() {
+    dispatch({ type: CartActionKind.INCRESECOUNT, product });
   }
 
-  function handleDecreseClick(id: number) {
-    updateCartList((draft) => {
-      const item = draft.find((item) => item.product.id === id);
-      if (item?.count && item.count > 1) {
-        item.count--;
-        return draft;
-      }
-      return draft.filter((item) => item.product.id !== id);
-    });
+  function handleDecreseClick() {
+    count > 1
+      ? dispatch({ type: CartActionKind.DECRESESECOUNT, product })
+      : dispatch({ type: CartActionKind.DELETE, product });
   }
 
   return (
@@ -55,14 +46,14 @@ const CartItem = ({ product, count, updateCartList }: Prop) => {
           <div className="d-flex">
             <p
               className="d-inline mx-auto my-0 p-0"
-              onClick={() => handleDecreseClick(product.id)}
+              onClick={handleDecreseClick}
             >
               -
             </p>
             <p className="d-inline mx-aut0 my-0 p-0">{count}</p>
             <p
               className="d-inline mx-auto my-0 p-0"
-              onClick={() => handleIncreseClick(product.id)}
+              onClick={handleIncreseClick}
             >
               +
             </p>
@@ -71,7 +62,7 @@ const CartItem = ({ product, count, updateCartList }: Prop) => {
             <div
               className="col"
               style={{ textAlign: "center" }}
-              onClick={() => handleDeleteClick(product.id)}
+              onClick={handleDeleteClick}
             >
               x
             </div>
