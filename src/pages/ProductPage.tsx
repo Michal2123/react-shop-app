@@ -1,12 +1,10 @@
 import { useParams } from "react-router-dom";
-import ProductInterface from "../interfaces/ProductInterface";
 import ProductDetail from "../components/ProductDetail";
+import { useContext } from "react";
+import { ProductContext } from "../context/ProductContext";
 
-interface Prop {
-  productList: ProductInterface[];
-}
-
-const ProductPage = ({ productList }: Prop) => {
+const ProductPage = () => {
+  const { productList } = useContext(ProductContext);
   const { id } = useParams();
   const productId = Number(id);
   const product = productList.find((product) => product.id === productId);

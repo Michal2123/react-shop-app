@@ -27,7 +27,7 @@ const NavigationBar = () => {
           className=" mx-auto mb-0 align-middle"
           onClick={() => handleNavLinkClick("home")}
         >
-          <Image src={logo} style={{ height: "150px" }} />
+          <Image src={logo} style={{ height: "60px" }} />
         </Link>
       </Navbar.Brand>
 

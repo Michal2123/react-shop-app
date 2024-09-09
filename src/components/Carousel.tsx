@@ -1,8 +1,8 @@
 import { Carousel, Image } from "react-bootstrap";
-import ProductInterface from "../interfaces/ProductInterface";
+import { IProduct } from "../interfaces/ProductInterface";
 
 interface Prop {
-  productList: ProductInterface[];
+  productList: IProduct[];
 }
 
 const CarouselComponent = ({ productList }: Prop) => {

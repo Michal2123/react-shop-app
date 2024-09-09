@@ -1,13 +1,13 @@
-import ProductInterface from "./ProductInterface";
+import { IProduct } from "./ProductInterface";
 import { CartActionKind } from "../enum/CartEnum";
 
 export interface ICartAction {
   type: CartActionKind;
-  product: ProductInterface;
+  product: IProduct;
 }
 
 export interface ICartList {
-  product: ProductInterface;
+  product: IProduct;
   count: number;
 }
 

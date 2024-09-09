@@ -1,11 +1,9 @@
+import { useContext } from "react";
 import ProductList from "../components/ProductList";
-import ProductInterface from "../interfaces/ProductInterface";
+import { ProductContext } from "../context/ProductContext";
 
-interface Prop {
-  productList: ProductInterface[];
-}
-
-const ProductsPage = ({ productList }: Prop) => {
+const ProductsPage = () => {
+  const { productList } = useContext(ProductContext);
   return <ProductList productList={productList} />;
 };
 

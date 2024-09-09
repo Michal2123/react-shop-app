@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import ProductInterface from "../interfaces/ProductInterface";
+import { IProduct } from "../interfaces/ProductInterface";
 
 interface Prop {
-  product: ProductInterface;
-  onBuyClick(product: ProductInterface): void;
+  product: IProduct;
+  onBuyClick(product: IProduct): void;
 }
 
 const Product = ({ product, onBuyClick }: Prop) => {
@@ -24,6 +24,7 @@ const Product = ({ product, onBuyClick }: Prop) => {
               {product.name}, {product.id}
             </h3>
             <p className="card-text">{product.describe}</p>
+            <p>Category: {product.category}</p>
             <p>Price: {product.price} PLN</p>
             <div className="d-flex justify-content-between">
               <Button onClick={() => onBuyClick(product)}>Buy</Button>

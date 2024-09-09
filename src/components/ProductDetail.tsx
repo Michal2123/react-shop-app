@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import ProductInterface from "../interfaces/ProductInterface";
+import { IProduct } from "../interfaces/ProductInterface";
 import { Image, Button } from "react-bootstrap";
 import { CartContext, UpdateCartContext } from "../context/CartContext";
 import { CartActionKind } from "../enum/CartEnum";
 
 interface Prop {
-  product: ProductInterface;
+  product: IProduct;
 }
 const ProductDetail = ({ product }: Prop) => {
   const { cartList } = useContext(CartContext);

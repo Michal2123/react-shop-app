@@ -1,11 +1,9 @@
+import { useContext } from "react";
 import Carousel from "../components/Carousel";
-import ProductInterface from "../interfaces/ProductInterface";
+import { ProductContext } from "../context/ProductContext";
 
-interface Prop {
-  productList: ProductInterface[];
-}
-
-const HomePage = ({ productList }: Prop) => {
+const HomePage = () => {
+  const { productList } = useContext(ProductContext);
   return (
     <div className="home-page-container">
       <section className="home-page-top-section">

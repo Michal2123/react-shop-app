@@ -1,11 +1,11 @@
-import ProductInterface from "../interfaces/ProductInterface";
 import { Image } from "react-bootstrap";
 import { UpdateCartContext } from "../context/CartContext";
 import { useContext } from "react";
 import { CartActionKind } from "../enum/CartEnum";
+import { IProduct } from "../interfaces/ProductInterface";
 
 interface Prop {
-  product: ProductInterface;
+  product: IProduct;
   count: number;
 }
 
