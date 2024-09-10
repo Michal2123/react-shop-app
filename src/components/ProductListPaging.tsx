@@ -5,17 +5,17 @@ import { IProduct } from "../interfaces/ProductInterface";
 interface Prop {
   productList: IProduct[];
   page: number;
-  calcProductPerPage: (agr1: IProduct[], arg2: number) => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ProductListPaging = ({ productList, page, calcProductPerPage }: Prop) => {
+const ProductListPaging = ({ productList, page, setPage }: Prop) => {
   const pageCount = Math.ceil(
     productList.length / ProductListPage.ITEMSPERPAGE
   );
 
   function handleClickPage(page: number) {
     window.scrollTo(0, 0);
-    calcProductPerPage(productList, page);
+    setPage(page);
   }
 
   return (

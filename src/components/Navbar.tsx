@@ -3,17 +3,12 @@ import { Navbar, Form, InputGroup, Button, Image } from "react-bootstrap";
 import logo from "../assets/images/logo.png";
 import cartIcon from "../assets/icons/cart-icon.png";
 import searchBtnIcon from "../assets/icons/search-btn-icon.png";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const NavigationBar = () => {
   const { cartList } = useContext(CartContext);
-  const [currentPage, setCuttentPage] = useState("home");
   const cartCount = cartList.reduce((partialSum, a) => partialSum + a.count, 0);
-
-  function handleNavLinkClick(page: string) {
-    setCuttentPage(page);
-  }
 
   return (
     <Navbar
@@ -22,11 +17,7 @@ const NavigationBar = () => {
       style={{ height: 75 }}
     >
       <Navbar.Brand className="d-flex w-25 mx-0 p-0">
-        <Link
-          to={"/"}
-          className=" mx-auto mb-0 align-middle"
-          onClick={() => handleNavLinkClick("home")}
-        >
+        <Link to={"/"} className=" mx-auto mb-0 align-middle">
           <Image src={logo} style={{ height: "60px" }} />
         </Link>
       </Navbar.Brand>
@@ -51,26 +42,20 @@ const NavigationBar = () => {
               isActive && "link-nav-active-page"
             } mx-1 px-2 pt-1 mb-0  align-middle`
           }
-          onClick={() => handleNavLinkClick("products")}
         >
           Products
         </NavLink>
         <NavLink
           to={"/cart"}
-          className={`${
-            cartCount > 0 && "position-relative"
-          } mx-auto mb-0 pt-1 align-middle `}
-          onClick={() => handleNavLinkClick("cart")}
+          className={({ isActive }) =>
+            `${cartCount > 0 && "position-relative"} icon-nav  ${
+              isActive && "icon-nav-active-page"
+            } mx-auto mb-0 pt-1 align-middle `
+          }
         >
-          <Image
-            src={cartIcon}
-            className={`icon-nav  ${
-              currentPage === "cart" && "icon-nav-active-page"
-            }`}
-            fluid
-          />
+          <Image src={cartIcon} fluid />
           {cartCount > 0 && (
-            <div className=" cart-count-nav  position-absolute bottom-0 end-0">
+            <div className=" cart-count-nav position-absolute bottom-0 end-0">
               <div
                 style={
                   cartCount > 99
@@ -84,13 +69,12 @@ const NavigationBar = () => {
           )}
         </NavLink>
         <NavLink
-          to={"/"}
-          className={(isActive) =>
+          to={"/signin"}
+          className={({ isActive }) =>
             `link-nav ${
               isActive && "link-nav-active-page"
-            } mx-1 px-2 pt-1 mb-0  align-middle`
+            }  mx-1 px-2 pt-1 mb-0  align-middle`
           }
-          onClick={() => handleNavLinkClick("singIn")}
         >
           Sing in
         </NavLink>

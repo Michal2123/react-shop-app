@@ -10,6 +10,7 @@ import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import ProductPage from "./pages/ProductPage";
 import ProductsLayout from "./layouts/ProductsLayout";
+import SignInPage from "./pages/SignInPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,6 +22,7 @@ function App() {
         </Route>
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/signin" element={<SignInPage />} />
       </Route>
     )
   );

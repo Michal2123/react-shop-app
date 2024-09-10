@@ -5,15 +5,11 @@ import {
   ProductContext,
 } from "../context/ProductContext";
 import { IFilterProducts } from "../interfaces/SideBarInterface";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const data: IProduct[] = myData;
 const ProductProvider = ({ children }: any) => {
-  const [productList, setProductList] = useState<IProduct[]>([]);
-
-  useEffect(() => {
-    setProductList(myData);
-  }, []);
+  const [productList, setProductList] = useState<IProduct[]>(data);
 
   function filterProductList({ filters, priceRange }: IFilterProducts) {
     let tempItems: IProduct[];

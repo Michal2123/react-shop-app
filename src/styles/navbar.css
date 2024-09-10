@@ -59,7 +59,7 @@
     -ms-transition: .15s; 
 }
 
-.icon-nav-active-page, .icon-nav:hover{
+.icon-nav-active-page img, .icon-nav:hover img{
     filter: brightness(0) invert(1);
 }
 

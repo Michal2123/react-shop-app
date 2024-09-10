@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { IProduct, IProductListPage } from "../interfaces/ProductInterface";
+import { useState } from "react";
+import { IProduct } from "../interfaces/ProductInterface";
 import { ProductListPage } from "../enum/ProductListEnum";
 import ProductsList from "./ProductList";
 import ProductListPaging from "./ProductListPaging";
@@ -9,35 +9,34 @@ interface Prop {
 }
 
 const Products = ({ productList }: Prop) => {
-  const [{ page, localProductList }, setPagingObject] =
-    useState<IProductListPage>({
-      page: 1,
-      localProductList: [],
-    });
+  const [page, setPage] = useState(1);
+  const [prevList, setPrevList] = useState(productList);
+  if (prevList !== productList) {
+    setPrevList(productList);
+    setPage(1);
+  }
 
-  useEffect(() => {
-    calcProductPerPage(productList, 1);
-  }, [productList]);
+  let paginateList: IProduct[] = calcProductPerPage();
 
-  function calcProductPerPage(productList: IProduct[], page: number) {
-    const tempList = productList.slice(
+  function calcProductPerPage(): IProduct[] {
+    return prevList.slice(
       (page - 1) * ProductListPage.ITEMSPERPAGE,
       page * ProductListPage.ITEMSPERPAGE
     );
-    setPagingObject({
-      page,
-      localProductList: tempList,
-    });
   }
 
   return (
     <>
-      <ProductsList productList={localProductList} />
-      <ProductListPaging
-        page={page}
-        productList={productList}
-        calcProductPerPage={calcProductPerPage}
-      />
+      {paginateList.length > 0 ? (
+        <>
+          <ProductsList productList={paginateList} />
+          <ProductListPaging
+            page={page}
+            productList={productList}
+            setPage={setPage}
+          />
+        </>
+      ) : null}
     </>
   );
 };

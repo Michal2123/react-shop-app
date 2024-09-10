@@ -2,7 +2,6 @@ import { useImmerReducer } from "use-immer";
 import { CartContext, UpdateCartContext } from "../context/CartContext";
 import useCartReducer from "../hooks/useCartReducer";
 import { ICartAction, ICartList } from "../interfaces/CartInteraface";
-import { useEffect } from "react";
 
 function getInitialCartState() {
   const json = localStorage.getItem("cartList");
@@ -15,9 +14,7 @@ const CartProvider = ({ children }: any) => {
     getInitialCartState()
   );
 
-  useEffect(() => {
-    localStorage.setItem("cartList", JSON.stringify(cartList));
-  }, [cartList]);
+  localStorage.setItem("cartList", JSON.stringify(cartList));
 
   return (
     <CartContext.Provider value={{ cartList }}>
