@@ -6,7 +6,15 @@ export default function useCartReducer(
   action: ICartAction
 ) {
   const { type, product } = action;
-  switch (type) {
+  let localType: CartActionKind;
+  if (type === CartActionKind.ADD) {
+    draft.find((a) => a.product.id === product.id)
+      ? (localType = CartActionKind.INCRESECOUNT)
+      : (localType = CartActionKind.ADD);
+  } else {
+    localType = type;
+  }
+  switch (localType) {
     case CartActionKind.ADD:
       {
         draft.push({

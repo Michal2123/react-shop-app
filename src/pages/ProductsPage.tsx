@@ -1,10 +1,19 @@
-import { useContext } from "react";
-import ProductList from "../components/ProductList";
-import { ProductContext } from "../context/ProductContext";
+import { useContext, useEffect } from "react";
+import Products from "../components/Products";
+import {
+  FilterProductContext,
+  ProductContext,
+} from "../context/ProductContext";
 
 const ProductsPage = () => {
   const { productList } = useContext(ProductContext);
-  return <ProductList productList={productList} />;
+  const { resetProductList } = useContext(FilterProductContext);
+  useEffect(() => {
+    return () => {
+      resetProductList();
+    };
+  }, []);
+  return <Products productList={productList} />;
 };
 
 export default ProductsPage;

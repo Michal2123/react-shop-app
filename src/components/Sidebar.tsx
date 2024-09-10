@@ -1,9 +1,11 @@
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { ProductFilterKind } from "../enum/productFillterEnum";
 import { useImmer } from "use-immer";
 import { IFilterProducts } from "../interfaces/SideBarInterface";
 import { useContext } from "react";
 import { FilterProductContext } from "../context/ProductContext";
+import FilterFormCheck from "./FilterFormCheck";
+import FilterFormRange from "./FilterFormRange";
 
 const Sidebar = () => {
   const [filters, setFilters] = useImmer<IFilterProducts>({
@@ -11,7 +13,7 @@ const Sidebar = () => {
     priceRange: 100,
   });
 
-  const { updateProductList } = useContext(FilterProductContext);
+  const { filterProductList } = useContext(FilterProductContext);
 
   function handleChangeCheck(value: boolean, filter: ProductFilterKind) {
     setFilters((draft) => {
@@ -23,7 +25,7 @@ const Sidebar = () => {
     });
   }
 
-  function handleChangeSlider(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeRange(event: React.ChangeEvent<HTMLInputElement>) {
     setFilters((draft) => {
       draft.priceRange = Number(event.target.value);
     });
@@ -33,7 +35,7 @@ const Sidebar = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     event.preventDefault();
-    updateProductList(filters);
+    filterProductList(filters);
   }
 
   return (
@@ -46,44 +48,32 @@ const Sidebar = () => {
       }}
     >
       <div className="mx-3" style={{ marginTop: " 25px" }}>
-        <div className="d-flex justify-content-between">
-          <Form.Label>Max price</Form.Label>
-          <Form.Label>{filters.priceRange}</Form.Label>
-        </div>
+        <FilterFormRange
+          title="Max price"
+          priceRange={filters.priceRange}
+          handleChangeRange={handleChangeRange}
+        />
+        <FilterFormCheck
+          title="Vegetables"
+          category={ProductFilterKind.VEGETABLES}
+          handleChangeCheck={handleChangeCheck}
+        />
+        <FilterFormCheck
+          title="Fruits"
+          category={ProductFilterKind.FRUITS}
+          handleChangeCheck={handleChangeCheck}
+        />
+        <FilterFormCheck
+          title="Seeds"
+          category={ProductFilterKind.SEEDS}
+          handleChangeCheck={handleChangeCheck}
+        />
+        <FilterFormCheck
+          title="Nuts"
+          category={ProductFilterKind.NUTS}
+          handleChangeCheck={handleChangeCheck}
+        />
 
-        <Form.Range value={filters.priceRange} onChange={handleChangeSlider} />
-        <Form.Group className="d-flex justify-content-between my-2">
-          <Form.Label>Vegetables</Form.Label>
-          <Form.Check
-            onChange={(e) =>
-              handleChangeCheck(e.target.checked, ProductFilterKind.VEGETABLES)
-            }
-          />
-        </Form.Group>
-        <Form.Group className="d-flex justify-content-between my-2">
-          <Form.Label>Fruits</Form.Label>
-          <Form.Check
-            onChange={(e) =>
-              handleChangeCheck(e.target.checked, ProductFilterKind.FRUITS)
-            }
-          />
-        </Form.Group>
-        <Form.Group className="d-flex justify-content-between my-2">
-          <Form.Label>Seeds</Form.Label>
-          <Form.Check
-            onChange={(e) =>
-              handleChangeCheck(e.target.checked, ProductFilterKind.SEEDS)
-            }
-          />
-        </Form.Group>
-        <Form.Group className="d-flex justify-content-between my-2">
-          <Form.Label>Nuts</Form.Label>
-          <Form.Check
-            onChange={(e) =>
-              handleChangeCheck(e.target.checked, ProductFilterKind.NUTS)
-            }
-          />
-        </Form.Group>
         <div className="d-flex justify-content-end my-2">
           <Button type="submit" onClick={handleclickSubmit}>
             Filter

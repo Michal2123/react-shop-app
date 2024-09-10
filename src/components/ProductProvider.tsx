@@ -6,6 +6,7 @@ import {
 } from "../context/ProductContext";
 import { IFilterProducts } from "../interfaces/SideBarInterface";
 import { useEffect, useState } from "react";
+
 const data: IProduct[] = myData;
 const ProductProvider = ({ children }: any) => {
   const [productList, setProductList] = useState<IProduct[]>([]);
@@ -14,29 +15,34 @@ const ProductProvider = ({ children }: any) => {
     setProductList(myData);
   }, []);
 
-  function filterProductList(filter: IFilterProducts) {
-    if (filter.filters.length > 0) {
-      let tempItems = filter.filters.map((selectedFilter) => {
-        let temp = data.filter(
-          (item) =>
-            item.category === selectedFilter && item.price <= filter.priceRange
-        );
-        return temp;
-      });
-
-      setProductList(tempItems.flat().sort((a, b) => (a.id > b.id ? 1 : -1)));
-      return;
+  function filterProductList({ filters, priceRange }: IFilterProducts) {
+    let tempItems: IProduct[];
+    if (filters.length > 0) {
+      tempItems = filters
+        .map((selectedFilter) => {
+          const temp = data.filter(
+            (item) =>
+              item.category === selectedFilter && item.price <= priceRange
+          );
+          return temp;
+        })
+        .flat()
+        .sort((a, b) => (a.id > b.id ? 1 : -1));
+    } else {
+      tempItems = data.filter((item) => item.price <= priceRange);
     }
 
-    const tempData = data.filter((item) => item.price <= filter.priceRange);
+    setProductList(tempItems);
+  }
 
-    setProductList(tempData);
+  function resetProductList() {
+    setProductList(myData);
   }
 
   return (
     <ProductContext.Provider value={{ productList: productList }}>
       <FilterProductContext.Provider
-        value={{ updateProductList: filterProductList }}
+        value={{ filterProductList, resetProductList }}
       >
         {children}
       </FilterProductContext.Provider>

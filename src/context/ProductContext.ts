@@ -9,5 +9,6 @@ export const ProductContext = createContext<IProductContext>({
 });
 
 export const FilterProductContext = createContext<IUpdateProductContext>({
-  updateProductList() {},
+  filterProductList() {},
+  resetProductList() {},
 });

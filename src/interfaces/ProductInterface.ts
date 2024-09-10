@@ -14,5 +14,11 @@ export interface IProductContext {
 }
 
 export interface IUpdateProductContext {
-  updateProductList: (arg: IFilterProducts) => void;
+  filterProductList: (arg: IFilterProducts) => void;
+  resetProductList: () => void;
+}
+
+export interface IProductListPage {
+  page: number;
+  localProductList: IProduct[];
 }
