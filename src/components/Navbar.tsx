@@ -25,6 +25,7 @@ const NavigationBar = () => {
       <Form className="d-flex w-50 h-75  navbar-form justify-content-center">
         <InputGroup className="w-75">
           <Form.Control
+            name="Seatch Input"
             placeholder="Search"
             type="text"
             className="shadow-none rounded-0 input-nav-search"

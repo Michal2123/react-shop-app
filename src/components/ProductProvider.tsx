@@ -1,22 +1,35 @@
 import { IProduct } from "../interfaces/ProductInterface";
-import myData from "../assets/Mockdb.json";
 import {
   FilterProductContext,
   ProductContext,
 } from "../context/ProductContext";
 import { IFilterProducts } from "../interfaces/SideBarInterface";
-import { useState } from "react";
-
-const data: IProduct[] = myData;
+import { useEffect, useState } from "react";
 const ProductProvider = ({ children }: any) => {
-  const [productList, setProductList] = useState<IProduct[]>(data);
+  const [fechedData, setFechedData] = useState<IProduct[]>([]);
+  const [productList, setProductList] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    let didFetch = false;
+    fetch("http://localhost:3001/products")
+      .then((response) => response.json())
+      .then((data) => {
+        if (!didFetch) {
+          setFechedData(data);
+          setProductList(data);
+        }
+      });
+    return () => {
+      didFetch = true;
+    };
+  }, []);
 
   function filterProductList({ filters, priceRange }: IFilterProducts) {
     let tempItems: IProduct[];
     if (filters.length > 0) {
       tempItems = filters
         .map((selectedFilter) => {
-          const temp = data.filter(
+          const temp = fechedData.filter(
             (item) =>
               item.category === selectedFilter && item.price <= priceRange
           );
@@ -25,14 +38,14 @@ const ProductProvider = ({ children }: any) => {
         .flat()
         .sort((a, b) => (a.id > b.id ? 1 : -1));
     } else {
-      tempItems = data.filter((item) => item.price <= priceRange);
+      tempItems = fechedData.filter((item) => item.price <= priceRange);
     }
 
     setProductList(tempItems);
   }
 
   function resetProductList() {
-    setProductList(myData);
+    setProductList(fechedData);
   }
 
   return (

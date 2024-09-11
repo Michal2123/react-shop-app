@@ -9,12 +9,17 @@ interface Prop {
 const FilterFormRange = ({ title, priceRange, handleChangeRange }: Prop) => {
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <Form.Label>{title}</Form.Label>
-        <Form.Label>{priceRange}</Form.Label>
-      </div>
-
-      <Form.Range value={priceRange} onChange={handleChangeRange} />
+      <Form.Label className="d-flex flex-column">
+        <div className="d-flex justify-content-between">
+          <span>{title}</span>
+          <span>{priceRange}</span>
+        </div>
+        <Form.Range
+          name="Price Range"
+          value={priceRange}
+          onChange={handleChangeRange}
+        />
+      </Form.Label>
     </>
   );
 };

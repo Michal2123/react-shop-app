@@ -9,11 +9,14 @@ interface Prop {
 
 const FilterFormCheck = ({ title, category, handleChangeCheck }: Prop) => {
   return (
-    <Form.Group className="d-flex justify-content-between my-2">
-      <Form.Label>{title}</Form.Label>
-      <Form.Check
-        onChange={(e) => handleChangeCheck(e.target.checked, category)}
-      />
+    <Form.Group className="my-3">
+      <Form.Label className="d-flex justify-content-between ">
+        {title}
+        <Form.Check
+          name={category}
+          onChange={(e) => handleChangeCheck(e.target.checked, category)}
+        />
+      </Form.Label>
     </Form.Group>
   );
 };
