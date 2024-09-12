@@ -5,10 +5,11 @@ interface Prop {
   type: string;
   label: string;
   placeholder: string;
-  controller: string;
-  setController: (arg: string) => void;
-  isLoading: boolean;
-  invalidMessage: string;
+  value: string;
+  setController: (name: string, value: string) => void;
+  isLoading?: boolean | undefined;
+  invalidMessage: string | undefined;
+  isInvalid?: boolean;
 }
 
 const ValidateFormInput = ({
@@ -16,13 +17,14 @@ const ValidateFormInput = ({
   placeholder,
   type,
   label,
-  controller,
+  value,
   invalidMessage,
   isLoading,
+  isInvalid,
   setController,
 }: Prop) => {
   return (
-    <Form.Group className="mb-3">
+    <Form.Group className="my-2">
       <Form.Label>
         {label}
         <Form.Control
@@ -30,12 +32,13 @@ const ValidateFormInput = ({
           className="shadow-none rounded-0 input-nav-search mt-1"
           type={type}
           placeholder={placeholder}
-          value={controller}
+          value={value}
           onChange={(e) => {
-            setController(e.target.value);
+            setController(e.target.name, e.target.value);
           }}
           disabled={isLoading}
           required
+          isInvalid={isInvalid}
         />
         <Form.Control.Feedback type="invalid">
           {invalidMessage}

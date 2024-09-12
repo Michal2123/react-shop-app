@@ -234,5 +234,16 @@
     }
   ],
   "users": [
+    {
+      "id": "d704",
+      "firstName": "qwe",
+      "lastName": "asd",
+      "email": "abc@email.com",
+      "city": "zxc",
+      "address": "vcx",
+      "zipCode": "12-034",
+      "password": "12345",
+      "token": "lshbdfouwegrlqweh2138uelkn"
+    }
   ]
 }

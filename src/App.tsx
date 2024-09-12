@@ -11,6 +11,8 @@ import CartPage from "./pages/CartPage";
 import ProductPage from "./pages/ProductPage";
 import ProductsLayout from "./layouts/ProductsLayout";
 import SignInPage from "./pages/SignInPage";
+import RegisterPage from "./pages/RegisterPage";
+import ProtectedRout from "./components/ProtectedRout";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,7 +24,10 @@ function App() {
         </Route>
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route element={<ProtectedRout />}>
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
       </Route>
     )
   );

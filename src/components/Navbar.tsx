@@ -5,8 +5,14 @@ import cartIcon from "../assets/icons/cart-icon.png";
 import searchBtnIcon from "../assets/icons/search-btn-icon.png";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import {
+  AuthContext,
+  UpdateAuthContext,
+} from "../context/AuthenticationContext";
 
 const NavigationBar = () => {
+  const { logOut } = useContext(UpdateAuthContext);
+  const { user } = useContext(AuthContext);
   const { cartList } = useContext(CartContext);
   const cartCount = cartList.reduce((partialSum, a) => partialSum + a.count, 0);
 
@@ -69,16 +75,22 @@ const NavigationBar = () => {
             </div>
           )}
         </NavLink>
-        <NavLink
-          to={"/signin"}
-          className={({ isActive }) =>
-            `link-nav ${
-              isActive && "link-nav-active-page"
-            }  mx-1 px-2 pt-1 mb-0  align-middle`
-          }
-        >
-          Sing in
-        </NavLink>
+        {user ? (
+          <NavLink to={"/"} className="link-nav" onClick={logOut}>
+            Log Out
+          </NavLink>
+        ) : (
+          <NavLink
+            to={"/signin"}
+            className={({ isActive }) =>
+              `link-nav ${
+                isActive && "link-nav-active-page"
+              }  mx-1 px-2 pt-1 mb-0  align-middle`
+            }
+          >
+            Sing in
+          </NavLink>
+        )}
       </div>
     </Navbar>
   );

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ValidateFormInput from "./ValidateFormInput";
+import { IUser } from "../interfaces/AuthenticationInterface";
+import { UpdateAuthContext } from "../context/AuthenticationContext";
 
-interface Prop {
-  changeIsSignIn: () => void;
-}
-
-const SignInForm = ({ changeIsSignIn }: Prop) => {
+const SignInForm = () => {
+  const { logIn } = useContext(UpdateAuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,14 +17,29 @@ const SignInForm = ({ changeIsSignIn }: Prop) => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const form = e.currentTarget;
+    e.preventDefault();
     if (form.checkValidity() === false) {
-      e.preventDefault();
       e.stopPropagation();
       setValidated(true);
       return;
     }
-    setIsLoading(true);
-    navigate("/");
+    fetch(`http://localhost:3001/users?email=${email}&password=${password}`)
+      .then((response) => response.json())
+      .then((user: IUser) => {
+        if (!Object.keys(user).length) {
+          throw Error("Incorrect email or password");
+        }
+        logIn(user);
+        navigate("/");
+      })
+      .catch((error: Error) => {
+        alert("Something went wrong :(");
+        console.log(error);
+        setError(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -38,10 +53,12 @@ const SignInForm = ({ changeIsSignIn }: Prop) => {
           placeholder="Enter email"
           type="email"
           label="Email"
-          controller={email}
+          value={email}
           invalidMessage="Please enter email."
           isLoading={isLoading}
-          setController={setEmail}
+          setController={(_, v) => {
+            setEmail(v);
+          }}
         />
 
         <ValidateFormInput
@@ -49,21 +66,29 @@ const SignInForm = ({ changeIsSignIn }: Prop) => {
           placeholder="Enter password"
           type="password"
           label="Password"
-          controller={password}
+          value={password}
           invalidMessage="Please enter password."
           isLoading={isLoading}
-          setController={setPassword}
+          setController={(_, v) => {
+            setPassword(v);
+          }}
         />
-        <Form.Group className="mb-3">
+        {!!error.length ? (
+          <Form.Group className="mb-2" style={{ textAlign: "center" }}>
+            <Form.Text style={{ color: "rgb(220, 53, 69)" }}>{error}</Form.Text>
+          </Form.Group>
+        ) : null}
+
+        <Form.Group className="mb-3" style={{ textAlign: "center" }}>
           <Form.Text>
             Don't have account?
-            <span
+            <NavLink
               style={{ color: "blue", cursor: "pointer" }}
-              onClick={changeIsSignIn}
+              to={"/register"}
             >
               {" "}
               Register
-            </span>
+            </NavLink>
           </Form.Text>
         </Form.Group>
         <div className="d-flex justify-content-center">

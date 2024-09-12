@@ -3,20 +3,23 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartProvider from "../components/CartProvider";
 import ProductProvider from "../components/ProductProvider";
+import AuthenticationProvider from "../components/AuthenticationProvider";
 
 const MainLayout = () => {
   return (
-    <ProductProvider>
-      <CartProvider>
-        <div className="main-layout-container">
-          <Navbar />
-          <div className="main-layout-main">
-            <Outlet />
+    <AuthenticationProvider>
+      <ProductProvider>
+        <CartProvider>
+          <div className="main-layout-container">
+            <Navbar />
+            <div className="main-layout-main">
+              <Outlet />
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </CartProvider>
-    </ProductProvider>
+        </CartProvider>
+      </ProductProvider>
+    </AuthenticationProvider>
   );
 };
 
