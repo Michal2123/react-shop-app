@@ -2,21 +2,17 @@ import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ValidateFormInput from "./ValidateFormInput";
 import { NavLink, useNavigate } from "react-router-dom";
-import { RegisterData } from "./Register";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 import { IUser } from "../interfaces/AuthenticationInterface";
+import { Register } from "../service/RegisterService";
+import { IRegisterData } from "../interfaces/RegisterInterface";
 
 interface Prop {
-  registerData: RegisterData;
-  sendData: () => Promise<Response>;
+  registerData: IRegisterData;
   updateRegisterData: (name: string, value: string) => void;
 }
 
-const RegisterStepTwoForm = ({
-  registerData,
-  sendData,
-  updateRegisterData,
-}: Prop) => {
+const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
   const { logIn } = useContext(UpdateAuthContext);
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +32,7 @@ const RegisterStepTwoForm = ({
     }
 
     setIsLoading(true);
-    sendData()
+    Register(registerData)
       .then((response) => response.json())
       .then((user: IUser) => logIn(user))
       .catch((error) => {

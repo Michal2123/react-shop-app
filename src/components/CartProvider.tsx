@@ -1,15 +1,15 @@
 import { useImmerReducer } from "use-immer";
 import { CartContext, UpdateCartContext } from "../context/CartContext";
 import useCartReducer from "../hooks/useCartReducer";
-import { ICartAction, ICartList } from "../interfaces/CartInteraface";
+import { ICartAction, ICartItem } from "../interfaces/CartInteraface";
 
 function getInitialCartState() {
   const json = localStorage.getItem("cartList");
-  return json !== null ? (JSON.parse(json) as ICartList[]) : [];
+  return json !== null ? (JSON.parse(json) as ICartItem[]) : [];
 }
 
 const CartProvider = ({ children }: any) => {
-  const [cartList, dispatch] = useImmerReducer<ICartList[], ICartAction>(
+  const [cartList, dispatch] = useImmerReducer<ICartItem[], ICartAction>(
     useCartReducer,
     getInitialCartState()
   );

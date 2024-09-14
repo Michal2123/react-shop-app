@@ -1,10 +1,66 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartItem from "../components/CartItem";
 import { Button } from "react-bootstrap";
-import { CartContext } from "../context/CartContext";
+import { CartContext, UpdateCartContext } from "../context/CartContext";
+import { PostOrderToHistory } from "../service/HistoryService";
+import { AuthContext } from "../context/AuthenticationContext";
+import { useNavigate } from "react-router-dom";
+import { CartActionKind } from "../enum/CartEnum";
+import { IOrderItem } from "../interfaces/HistoryInterface";
 
 const CartPage = () => {
   const { cartList } = useContext(CartContext);
+  const { dispatch } = useContext(UpdateCartContext);
+  const { user } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigator = useNavigate();
+
+  const totalPrice = cartList.reduce(
+    (sumValue, item) => sumValue + item.count * item.product.price,
+    0
+  );
+
+  function handleClickOrder() {
+    const today = new Date();
+    const orderList = cartList.map(({ product, count }) => {
+      const temp: IOrderItem = {
+        productId: String(product.id),
+        name: product.name,
+        price: product.price,
+        count: count,
+      };
+      return temp;
+    });
+    if (user) {
+      setIsLoading(true);
+      PostOrderToHistory({
+        userId: user.id,
+        date: `${today.getDay()}/${today.getMonth()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`,
+        orderList,
+      })
+        .then(() => {
+          onSuccess();
+        })
+        .catch((error: Error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+      return;
+    }
+    onSuccess();
+  }
+
+  function onSuccess() {
+    alert("Products will be send shortly.");
+    dispatch({
+      type: CartActionKind.CLEARCART,
+      product: undefined,
+    });
+    navigator("/");
+  }
 
   return (
     <>
@@ -14,12 +70,13 @@ const CartPage = () => {
             {cartList.map(({ product, count }) => (
               <CartItem key={product.id} product={product} count={count} />
             ))}
-            <h5 style={{ textAlign: "end" }}>Price: 555$</h5>
+            <h5 style={{ textAlign: "end" }}>Price: {totalPrice}$</h5>
             <Button
               className="mx-auto"
               style={{ maxWidth: "300px", marginTop: "50px" }}
+              onClick={handleClickOrder}
             >
-              Order
+              {isLoading ? "Loading..." : "Order"}
             </Button>
           </div>
         </div>

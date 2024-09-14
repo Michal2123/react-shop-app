@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import ValidateFormInput from "./ValidateFormInput";
-import { IUser } from "../interfaces/AuthenticationInterface";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
+import { SignIn } from "../service/SignInService";
 
 const SignInForm = () => {
   const { logIn } = useContext(UpdateAuthContext);
@@ -23,12 +23,8 @@ const SignInForm = () => {
       setValidated(true);
       return;
     }
-    fetch(`http://localhost:3001/users?email=${email}&password=${password}`)
-      .then((response) => response.json())
-      .then((user: IUser) => {
-        if (!Object.keys(user).length) {
-          throw Error("Incorrect email or password");
-        }
+    SignIn(email, password)
+      .then((user) => {
         logIn(user);
         navigate("/");
       })

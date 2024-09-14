@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   AuthContext,
   UpdateAuthContext,
@@ -6,7 +6,7 @@ import {
 import { IUser } from "../interfaces/AuthenticationInterface";
 
 interface Prop {
-  children: any;
+  children: ReactNode;
 }
 
 function getInitialUserState() {

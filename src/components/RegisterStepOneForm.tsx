@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import ValidateFormInput from "./ValidateFormInput";
-import { RegisterData } from "./Register";
+import { IRegisterData } from "../interfaces/RegisterInterface";
 
 interface Prop {
-  registerData: RegisterData;
+  registerData: IRegisterData;
   updateRegisterData: (name: string, value: string) => void;
   handleNextStep: () => void;
 }

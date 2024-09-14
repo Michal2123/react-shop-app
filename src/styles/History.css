@@ -1,0 +1,3 @@
+.resp-margin-right{
+    margin-right: Clamp(5px,30%,200px);
+}

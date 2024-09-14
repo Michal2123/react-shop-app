@@ -4,20 +4,28 @@ import {
   ProductContext,
 } from "../context/ProductContext";
 import { IFilterProducts } from "../interfaces/SideBarInterface";
-import { useEffect, useState } from "react";
-const ProductProvider = ({ children }: any) => {
+import { ReactNode, useEffect, useState } from "react";
+import { GetAllProducts } from "../service/ProductService";
+
+interface Prop {
+  children: ReactNode;
+}
+
+const ProductProvider = ({ children }: Prop) => {
   const [fechedData, setFechedData] = useState<IProduct[]>([]);
   const [productList, setProductList] = useState<IProduct[]>([]);
 
   useEffect(() => {
     let didFetch = false;
-    fetch("http://localhost:3001/products")
-      .then((response) => response.json())
+    GetAllProducts()
       .then((data) => {
         if (!didFetch) {
           setFechedData(data);
           setProductList(data);
         }
+      })
+      .catch((error: Error) => {
+        console.log(error);
       });
     return () => {
       didFetch = true;
@@ -30,15 +38,15 @@ const ProductProvider = ({ children }: any) => {
       tempItems = filters
         .map((selectedFilter) => {
           const temp = fechedData.filter(
-            (item) =>
-              item.category === selectedFilter && item.price <= priceRange
+            ({ category, price }) =>
+              category === selectedFilter && price <= priceRange
           );
           return temp;
         })
         .flat()
         .sort((a, b) => (a.id > b.id ? 1 : -1));
     } else {
-      tempItems = fechedData.filter((item) => item.price <= priceRange);
+      tempItems = fechedData.filter(({ price }) => price <= priceRange);
     }
 
     setProductList(tempItems);

@@ -7,6 +7,8 @@ import "./styles/Sidebar.css";
 import "./styles/Homepage.css";
 import "./styles/Footer.css";
 import "./styles/MainLayout.css";
+import "./styles/Dropdown.css";
+import "./styles/History.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -13,6 +13,9 @@ import ProductsLayout from "./layouts/ProductsLayout";
 import SignInPage from "./pages/SignInPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProtectedRout from "./components/ProtectedRout";
+import RestrictedRout from "./components/RestrictedRout";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const router = createBrowserRouter(
@@ -27,6 +30,10 @@ function App() {
         <Route element={<ProtectedRout />}>
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/register" element={<RegisterPage />} />
+        </Route>
+        <Route element={<RestrictedRout />}>
+          <Route path="/history" element={<OrderHistoryPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
     )

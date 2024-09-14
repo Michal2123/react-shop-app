@@ -233,6 +233,64 @@
       "category": "VEGETABLES"
     }
   ],
+  "history": [
+    {
+      "id": "a6b5",
+      "userId": "d704",
+      "date": "6/8/2024 18:38",
+      "orderList": [
+        {
+          "productId": "0",
+          "name": "tomato",
+          "price": 1,
+          "count": 1
+        },
+        {
+          "productId": "2",
+          "name": "tomato",
+          "price": 1,
+          "count": 3
+        },
+        {
+          "productId": "4",
+          "name": "tomato",
+          "price": 1,
+          "count": 1
+        },
+        {
+          "productId": "5",
+          "name": "tomato",
+          "price": 1,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "49ca",
+      "userId": "d704",
+      "date": "6/8/2024 18:41",
+      "orderList": [
+        {
+          "productId": "2",
+          "name": "tomato",
+          "price": 1,
+          "count": 2
+        },
+        {
+          "productId": "6",
+          "name": "tomato",
+          "price": 1,
+          "count": 3
+        },
+        {
+          "productId": "5",
+          "name": "tomato",
+          "price": 1,
+          "count": 1
+        }
+      ]
+    }
+  ],
   "users": [
     {
       "id": "d704",

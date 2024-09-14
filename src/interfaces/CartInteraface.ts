@@ -3,16 +3,16 @@ import { CartActionKind } from "../enum/CartEnum";
 
 export interface ICartAction {
   type: CartActionKind;
-  product: IProduct;
+  product: IProduct | undefined;
 }
 
-export interface ICartList {
+export interface ICartItem {
   product: IProduct;
   count: number;
 }
 
 export interface ICartContext {
-  cartList: ICartList[];
+  cartList: ICartItem[];
 }
 
 export interface IUpdateCartContext {

@@ -2,16 +2,14 @@ import { Link, NavLink } from "react-router-dom";
 import { Navbar, Form, InputGroup, Button, Image } from "react-bootstrap";
 import logo from "../assets/images/logo.png";
 import cartIcon from "../assets/icons/cart-icon.png";
+import userIcon from "../assets/icons/user-icon.png";
 import searchBtnIcon from "../assets/icons/search-btn-icon.png";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import {
-  AuthContext,
-  UpdateAuthContext,
-} from "../context/AuthenticationContext";
+import { AuthContext } from "../context/AuthenticationContext";
+import CustomeDropdown from "./CustomeDropdown";
 
 const NavigationBar = () => {
-  const { logOut } = useContext(UpdateAuthContext);
   const { user } = useContext(AuthContext);
   const { cartList } = useContext(CartContext);
   const cartCount = cartList.reduce((partialSum, a) => partialSum + a.count, 0);
@@ -41,13 +39,11 @@ const NavigationBar = () => {
           </Button>
         </InputGroup>
       </Form>
-      <div className="d-flex w-25 h-75 me-2">
+      <div className=" row row-col-3 me-2">
         <NavLink
           to={"/products"}
           className={({ isActive }) =>
-            `link-nav ${
-              isActive && "link-nav-active-page"
-            } mx-1 px-2 pt-1 mb-0  align-middle`
+            `link-nav ${isActive && "link-nav-active-page"} col`
           }
         >
           Products
@@ -57,10 +53,10 @@ const NavigationBar = () => {
           className={({ isActive }) =>
             `${cartCount > 0 && "position-relative"} icon-nav  ${
               isActive && "icon-nav-active-page"
-            } mx-auto mb-0 pt-1 align-middle `
+            } col mx-3 p-0 pt-1`
           }
         >
-          <Image src={cartIcon} fluid />
+          <Image src={cartIcon} fluid style={{ minWidth: "30px" }} />
           {cartCount > 0 && (
             <div className=" cart-count-nav position-absolute bottom-0 end-0">
               <div
@@ -76,16 +72,16 @@ const NavigationBar = () => {
           )}
         </NavLink>
         {user ? (
-          <NavLink to={"/"} className="link-nav" onClick={logOut}>
-            Log Out
-          </NavLink>
+          <div className={` icon-nav  col mx-3 p-0 pt-1`}>
+            <CustomeDropdown>
+              <Image src={userIcon} fluid style={{ minWidth: "30px" }} />
+            </CustomeDropdown>
+          </div>
         ) : (
           <NavLink
             to={"/signin"}
             className={({ isActive }) =>
-              `link-nav ${
-                isActive && "link-nav-active-page"
-              }  mx-1 px-2 pt-1 mb-0  align-middle`
+              `link-nav ${isActive && "link-nav-active-page"}  col`
             }
           >
             Sing in

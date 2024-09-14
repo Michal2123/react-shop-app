@@ -1,6 +1,13 @@
 const Footer = () => {
   return (
     <footer className="footer-container">
+      <a
+        href="https://www.flaticon.com/free-icons/private-account"
+        title="private account icons"
+      >
+        Private account icons created by Bingge Liu - Flaticon
+      </a>
+
       <div
         className="row row-col-2 ms-auto my-3 w-50 me-5 mt-2"
         style={{ maxWidth: "500px" }}
