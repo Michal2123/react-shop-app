@@ -52,7 +52,7 @@ const SignInForm = () => {
           value={email}
           invalidMessage="Please enter email."
           isLoading={isLoading}
-          setController={(_, v) => {
+          onChange={(_, v) => {
             setEmail(v);
           }}
         />
@@ -65,7 +65,7 @@ const SignInForm = () => {
           value={password}
           invalidMessage="Please enter password."
           isLoading={isLoading}
-          setController={(_, v) => {
+          onChange={(_, v) => {
             setPassword(v);
           }}
         />

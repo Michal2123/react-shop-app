@@ -9,6 +9,7 @@ import "./styles/Footer.css";
 import "./styles/MainLayout.css";
 import "./styles/Dropdown.css";
 import "./styles/History.css";
+import "./styles/Profile.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

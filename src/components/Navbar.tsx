@@ -39,21 +39,22 @@ const NavigationBar = () => {
           </Button>
         </InputGroup>
       </Form>
-      <div className=" row row-col-3 me-2">
-        <NavLink
-          to={"/products"}
-          className={({ isActive }) =>
-            `link-nav ${isActive && "link-nav-active-page"} col`
-          }
-        >
-          Products
+      <div className="d-flex justify-content-end w-25 h-75 me-4">
+        <NavLink to={"/products"}>
+          {({ isActive }) => (
+            <Button
+              className={`link-nav ${isActive && "link-nav-active-page"} `}
+            >
+              Product
+            </Button>
+          )}
         </NavLink>
         <NavLink
           to={"/cart"}
           className={({ isActive }) =>
             `${cartCount > 0 && "position-relative"} icon-nav  ${
               isActive && "icon-nav-active-page"
-            } col mx-3 p-0 pt-1`
+            } mx-3 p-0 pt-1`
           }
         >
           <Image src={cartIcon} fluid style={{ minWidth: "30px" }} />
@@ -72,7 +73,7 @@ const NavigationBar = () => {
           )}
         </NavLink>
         {user ? (
-          <div className={` icon-nav  col mx-3 p-0 pt-1`}>
+          <div className={` icon-nav  mx-3 p-0 pt-1`}>
             <CustomeDropdown>
               <Image src={userIcon} fluid style={{ minWidth: "30px" }} />
             </CustomeDropdown>
@@ -81,7 +82,7 @@ const NavigationBar = () => {
           <NavLink
             to={"/signin"}
             className={({ isActive }) =>
-              `link-nav ${isActive && "link-nav-active-page"}  col`
+              `link-nav ${isActive && "link-nav-active-page"}`
             }
           >
             Sing in

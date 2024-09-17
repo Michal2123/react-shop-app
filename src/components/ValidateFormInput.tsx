@@ -1,18 +1,21 @@
 import { Form } from "react-bootstrap";
 
 interface Prop {
+  className?: string | undefined;
   name: string;
   type: string;
   label: string;
   placeholder: string;
   value: string;
-  setController: (name: string, value: string) => void;
+  onChange: (name: string, value: string) => void;
   isLoading?: boolean | undefined;
+  disabled?: boolean | undefined;
   invalidMessage: string | undefined;
   isInvalid?: boolean;
 }
 
 const ValidateFormInput = ({
+  className,
   name,
   placeholder,
   type,
@@ -21,22 +24,23 @@ const ValidateFormInput = ({
   invalidMessage,
   isLoading,
   isInvalid,
-  setController,
+  disabled,
+  onChange,
 }: Prop) => {
   return (
     <Form.Group className="my-2">
-      <Form.Label>
+      <Form.Label style={{ fontWeight: "500" }}>
         {label}
         <Form.Control
           name={name}
-          className="shadow-none rounded-0 input-nav-search mt-1"
+          className={className}
           type={type}
           placeholder={placeholder}
           value={value}
           onChange={(e) => {
-            setController(e.target.name, e.target.value);
+            onChange(e.target.name, e.target.value);
           }}
-          disabled={isLoading}
+          disabled={isLoading || disabled}
           required
           isInvalid={isInvalid}
         />

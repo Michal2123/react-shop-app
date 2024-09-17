@@ -1,25 +1,48 @@
-import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ValidateFormInput from "./ValidateFormInput";
-import { NavLink, useNavigate } from "react-router-dom";
-import { UpdateAuthContext } from "../context/AuthenticationContext";
-import { IUser } from "../interfaces/AuthenticationInterface";
-import { Register } from "../service/RegisterService";
-import { IRegisterData } from "../interfaces/RegisterInterface";
+import { IShippingDetails } from "../interfaces/ProfileInterface";
+
+import { UpdateShippingDetails } from "../service/ProfileService";
 import { zipCodeValidation } from "../utlis/InputValidation";
+import { IUser } from "../interfaces/AuthenticationInterface";
+import { useState } from "react";
 
 interface Prop {
-  registerData: IRegisterData;
-  updateRegisterData: (name: string, value: string) => void;
+  user: IUser;
+  updateUser: (user: IUser) => void;
 }
 
-const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
-  const { logIn } = useContext(UpdateAuthContext);
+const ProfileShippingTab = ({ user, updateUser }: Prop) => {
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [zipCodeErrorMessage, setzipCodeErrorMessage] = useState("");
-  const { firstName, lastName, city, zipCode, address } = registerData;
-  const navigate = useNavigate();
+
+  const userShippingDetails: IShippingDetails = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    city: user.city,
+    address: user.address,
+    zipCode: user.zipCode,
+  };
+
+  const [shippingDetails, setshippingDetails] =
+    useState<IShippingDetails>(userShippingDetails);
+
+  const { firstName, lastName, city, address, zipCode } = shippingDetails;
+
+  function updateShippingDetails(name: string, value: string) {
+    setshippingDetails({
+      ...shippingDetails,
+      [name]: value,
+    });
+  }
+
+  let isShippingDetails = true;
+  Object.values(userShippingDetails).forEach((value, index) => {
+    if (value !== Object.values(shippingDetails)[index]) {
+      isShippingDetails = false;
+    }
+  });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const form = e.currentTarget;
@@ -33,26 +56,24 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
     }
 
     setIsLoading(true);
-    Register(registerData)
-      .then((response) => response.json())
-      .then((user: IUser) => logIn(user))
-      .catch((error) => {
-        alert("Something went wrong :(");
-        console.log(error);
+    UpdateShippingDetails(shippingDetails, user.id)
+      .then((_) => {
+        alert("Shipping details has been updated.");
+        updateUser({
+          ...user,
+          ...shippingDetails,
+        });
       })
       .finally(() => {
         setIsLoading(false);
-        navigate("/");
       });
   }
 
   return (
-    <div className="card p-3 my-2 ">
+    <div className="mx-3">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group>
-          <h4 style={{ textAlign: "center" }}>Register</h4>
-        </Form.Group>
         <ValidateFormInput
+          className="input-form"
           name="firstName"
           placeholder="Enter first name"
           type="text"
@@ -60,9 +81,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           value={firstName}
           invalidMessage="Enter first name"
           isLoading={isLoading}
-          onChange={updateRegisterData}
+          onChange={updateShippingDetails}
         />
         <ValidateFormInput
+          className="input-form"
           name="lastName"
           placeholder="Enter last name"
           type="text"
@@ -70,9 +92,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           value={lastName}
           invalidMessage="Enter last name"
           isLoading={isLoading}
-          onChange={updateRegisterData}
+          onChange={updateShippingDetails}
         />
         <ValidateFormInput
+          className="input-form"
           name="city"
           placeholder="Enter city."
           type="text"
@@ -80,9 +103,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           value={city}
           invalidMessage="Enter city"
           isLoading={isLoading}
-          onChange={updateRegisterData}
+          onChange={updateShippingDetails}
         />
         <ValidateFormInput
+          className="input-form"
           name="zipCode"
           placeholder="Enter zip code."
           type="text"
@@ -93,9 +117,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           }
           isInvalid={!zipCodeErrorMessage.length && validated}
           isLoading={isLoading}
-          onChange={updateRegisterData}
+          onChange={updateShippingDetails}
         />
         <ValidateFormInput
+          className="input-form"
           name="address"
           placeholder="Enter address."
           type="text"
@@ -103,24 +128,16 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           value={address}
           invalidMessage="Enter address"
           isLoading={isLoading}
-          onChange={updateRegisterData}
+          onChange={updateShippingDetails}
         />
 
-        <Form.Group className="mb-3">
-          <Form.Text>
-            Already have account?
-            <NavLink
-              style={{ color: "blue", cursor: "pointer" }}
-              to={"/signin"}
-            >
-              {" "}
-              Sign in
-            </NavLink>
-          </Form.Text>
-        </Form.Group>
-        <div className="d-flex justify-content-center">
-          <Button variant="primary" type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Register"}
+        <div className="d-flex justify-content-end">
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={isLoading || isShippingDetails}
+          >
+            {isLoading ? "Loading..." : "Save"}
           </Button>
         </div>
       </Form>
@@ -128,4 +145,4 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
   );
 };
 
-export default RegisterStepTwoForm;
+export default ProfileShippingTab;

@@ -45,7 +45,7 @@ const RegisterStepOneForm = ({
           label="Email"
           value={email}
           invalidMessage="Please enter email."
-          setController={updateRegisterData}
+          onChange={updateRegisterData}
         />
         <ValidateFormInput
           name="password"
@@ -54,7 +54,7 @@ const RegisterStepOneForm = ({
           label="Password"
           value={password}
           invalidMessage="Please enter password."
-          setController={updateRegisterData}
+          onChange={updateRegisterData}
         />
         <ValidateFormInput
           name="Repeat Password Input"
@@ -63,7 +63,7 @@ const RegisterStepOneForm = ({
           label="Repeat password"
           value={repeatPassword}
           invalidMessage="Please repeate password."
-          setController={(_, v) => setRepeatPassword(v)}
+          onChange={(_, v) => setRepeatPassword(v)}
         />
 
         <Form.Group className="mb-3">
