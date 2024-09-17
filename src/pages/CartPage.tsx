@@ -6,12 +6,18 @@ import { PostOrderToHistory } from "../service/HistoryService";
 import { AuthContext } from "../context/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
 import { CartActionKind } from "../enum/CartEnum";
-import { IOrderItem } from "../interfaces/HistoryInterface";
+import { IGetHistoryItem, IOrderItem } from "../interfaces/HistoryInterface";
+import {
+  HistoryContext,
+  UpdateHistoryContext,
+} from "../context/HostoryContext";
 
 const CartPage = () => {
   const { cartList } = useContext(CartContext);
   const { dispatch } = useContext(UpdateCartContext);
   const { user } = useContext(AuthContext);
+  const { history } = useContext(HistoryContext);
+  const { updateHistory } = useContext(UpdateHistoryContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigator = useNavigate();
@@ -39,21 +45,18 @@ const CartPage = () => {
         date: `${today.getDay()}/${today.getMonth()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}`,
         orderList,
       })
-        .then(() => {
-          onSuccess();
+        .then((response) => response.json())
+        .then((data: IGetHistoryItem) => {
+          updateHistory([...history, data]);
         })
         .catch((error: Error) => {
           console.log(error);
+          return;
         })
         .finally(() => {
           setIsLoading(false);
         });
-      return;
     }
-    onSuccess();
-  }
-
-  function onSuccess() {
     alert("Products will be send shortly.");
     dispatch({
       type: CartActionKind.CLEARCART,

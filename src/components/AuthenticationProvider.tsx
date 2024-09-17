@@ -24,6 +24,7 @@ const AuthenticationProvider = ({ children }: Prop) => {
 
   function logOut() {
     localStorage.removeItem("user");
+    localStorage.removeItem("history");
     setUser(undefined);
   }
 

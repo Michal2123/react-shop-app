@@ -1,71 +1,38 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { HistoryContext } from "../context/HostoryContext";
+import Paging from "./Paging";
 import { IGetHistoryItem } from "../interfaces/HistoryInterface";
-import { GetOrderHistory } from "../service/HistoryService";
-import { AuthContext } from "../context/AuthenticationContext";
-
-function getInitialHistoryState() {
-  const json = localStorage.getItem("history");
-  return json !== null ? (JSON.parse(json) as IGetHistoryItem[]) : [];
-}
+import { calcItemsPerPage } from "../utlis/Calculations";
+import { HistoryListPage } from "../enum/HistoryListEnum";
+import HistoryList from "./HistoryList";
 
 const OrderHistory = () => {
-  const [history, setHistory] = useState<IGetHistoryItem[]>(
-    getInitialHistoryState()
+  const { history } = useContext(HistoryContext);
+  const [page, setPage] = useState(1);
+
+  const pageCount = Math.ceil(history.length / HistoryListPage.ITEMSPERPAGE);
+
+  const paginateList: IGetHistoryItem[] = calcItemsPerPage(
+    history,
+    page,
+    HistoryListPage.ITEMSPERPAGE
   );
-  const { user } = useContext(AuthContext);
-  useEffect(() => {
-    let didFetch = false;
-    if (!history.length && user) {
-      GetOrderHistory(user.id)
-        .then((data) => {
-          if (!didFetch) {
-            localStorage.setItem("history", JSON.stringify(data));
-            setHistory(data);
-          }
-        })
-        .catch((error: Error) => console.log(error));
-    }
-    return () => {
-      didFetch = true;
-    };
-  }, []);
-  if (history.length) {
+
+  if (paginateList.length) {
     return (
-      <div className="d-flex justify-content-center my-5">
-        <div className="card p-4 w-75">
-          {history.map((item, index) => (
-            <div key={item.id}>
-              <div>
-                {item.date}
-                <ul className="mt-3">
-                  {item.orderList.map(({ name, count, price, productId }) => (
-                    <li key={productId} className="ms-4">
-                      <div className="d-inline resp-margin-right">
-                        <h5 className="d-inline">{name}</h5>
-                        <p className="d-inline"> x {count}</p>
-                      </div>
-                      <h6 className="d-inline m-0 pt-1">{price * count}$</h6>
-                    </li>
-                  ))}
-                </ul>
-                <h2
-                  style={{
-                    textAlign: "end",
-                  }}
-                >
-                  Total:{" "}
-                  {item.orderList.reduce(
-                    (sumValue, item) => sumValue + item.count * item.price,
-                    0
-                  )}{" "}
-                  $
-                </h2>
-              </div>
-              {index !== history.length - 1 ? <hr className="my-3" /> : null}
-            </div>
-          ))}
-        </div>
-      </div>
+      <>
+        <HistoryList paginateList={paginateList} />
+        {pageCount > 1 ? (
+          <div className="my-2">
+            <Paging
+              page={page}
+              maxVisiblePages={3}
+              maxPageCount={pageCount}
+              setPage={setPage}
+            />
+          </div>
+        ) : null}
+      </>
     );
   }
   return (

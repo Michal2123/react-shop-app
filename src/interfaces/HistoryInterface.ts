@@ -17,3 +17,11 @@ export interface IOrderItem {
   count: number;
   price: number;
 }
+
+export interface IHistoryContext {
+  history: IGetHistoryItem[];
+}
+
+export interface IUpdateHistoryContext {
+  updateHistory: (arg: IGetHistoryItem[]) => void;
+}

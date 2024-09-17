@@ -2,7 +2,8 @@ import { useState } from "react";
 import { IProduct } from "../interfaces/ProductInterface";
 import { ProductListPage } from "../enum/ProductListEnum";
 import ProductsList from "./ProductList";
-import ProductListPaging from "./ProductListPaging";
+import Paging from "./Paging";
+import { calcItemsPerPage } from "../utlis/Calculations";
 
 interface Prop {
   productList: IProduct[];
@@ -16,28 +17,36 @@ const Products = ({ productList }: Prop) => {
     setPage(1);
   }
 
-  let paginateList: IProduct[] = calcProductPerPage();
+  const pageCount = Math.ceil(
+    productList.length / ProductListPage.ITEMSPERPAGE
+  );
 
-  function calcProductPerPage(): IProduct[] {
-    return prevList.slice(
-      (page - 1) * ProductListPage.ITEMSPERPAGE,
-      page * ProductListPage.ITEMSPERPAGE
+  const paginateList: IProduct[] = calcItemsPerPage(
+    prevList,
+    page,
+    ProductListPage.ITEMSPERPAGE
+  );
+
+  if (paginateList.length) {
+    return (
+      <>
+        <ProductsList productList={paginateList} />
+        {pageCount > 1 ? (
+          <Paging
+            page={page}
+            maxVisiblePages={pageCount}
+            maxPageCount={pageCount}
+            setPage={setPage}
+          />
+        ) : null}
+      </>
     );
   }
 
   return (
-    <>
-      {paginateList.length > 0 ? (
-        <>
-          <ProductsList productList={paginateList} />
-          <ProductListPaging
-            page={page}
-            productList={productList}
-            setPage={setPage}
-          />
-        </>
-      ) : null}
-    </>
+    <div className="d-flex justify-content-center mt-5">
+      <h5>Product list is empy.</h5>
+    </div>
   );
 };
 

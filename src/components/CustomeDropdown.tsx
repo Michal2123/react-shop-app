@@ -1,6 +1,6 @@
 import { Dropdown } from "react-bootstrap";
 import CustomToggle from "./CustomDropdownToggle";
-import { ReactNode, useContext } from "react";
+import { ReactNode, useContext, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 interface Props {
@@ -8,22 +8,27 @@ interface Props {
 }
 const CustomeDropdown = ({ children }: Props) => {
   const { logOut } = useContext(UpdateAuthContext);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownMenuRef = useRef<HTMLDivElement | null>(null);
+
+  function handleClickCloseDropdown() {
+    dropdownRef.current?.classList.remove("show");
+    dropdownMenuRef.current?.classList.remove("show");
+  }
+
   return (
-    <Dropdown>
+    <Dropdown ref={dropdownRef}>
       <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
         {children}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu
-        align={"end"}
-        className="mt-3 collapse"
-        id="customeDropdown"
-      >
+      <Dropdown.Menu align={"end"} className="mt-3" ref={dropdownMenuRef}>
         <NavLink
           to="/profile"
           className={({ isActive }) =>
             `dropdown-item ${isActive ? "active" : ""}`
           }
+          onClick={handleClickCloseDropdown}
         >
           Profile
         </NavLink>
@@ -32,11 +37,19 @@ const CustomeDropdown = ({ children }: Props) => {
           className={({ isActive }) =>
             `dropdown-item ${isActive ? "active" : ""}`
           }
+          onClick={handleClickCloseDropdown}
         >
           Order history
         </NavLink>
 
-        <NavLink to="/" className="dropdown-item" onClick={logOut}>
+        <NavLink
+          to="/"
+          className="dropdown-item"
+          onClick={() => {
+            handleClickCloseDropdown();
+            logOut();
+          }}
+        >
           Log out
         </NavLink>
       </Dropdown.Menu>

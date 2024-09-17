@@ -16,6 +16,7 @@ import ProtectedRout from "./components/ProtectedRout";
 import RestrictedRout from "./components/RestrictedRout";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -33,6 +34,7 @@ function App() {
         </Route>
         <Route element={<RestrictedRout />}>
           <Route path="/history" element={<OrderHistoryPage />} />
+          <Route path="/history/:id" element={<OrderPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
