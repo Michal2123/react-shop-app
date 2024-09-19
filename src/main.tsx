@@ -10,6 +10,7 @@ import "./styles/MainLayout.css";
 import "./styles/Dropdown.css";
 import "./styles/History.css";
 import "./styles/Profile.css";
+import "./styles/ProductsPage.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -4,6 +4,7 @@ import {
   FilterProductContext,
   ProductContext,
 } from "../context/ProductContext";
+import FilterFloatingButton from "../components/FilterFloatingButton";
 
 const ProductsPage = () => {
   const { productList } = useContext(ProductContext);
@@ -13,7 +14,12 @@ const ProductsPage = () => {
       resetProductList();
     };
   }, []);
-  return <Products productList={productList} />;
+  return (
+    <>
+      <Products productList={productList} />
+      <FilterFloatingButton />
+    </>
+  );
 };
 
 export default ProductsPage;

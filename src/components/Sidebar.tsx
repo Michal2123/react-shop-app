@@ -39,14 +39,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div
-      className="position-fixed vh-100 navbar-light "
-      style={{
-        maxWidth: "200px",
-        minWidth: "75px",
-        width: "15%",
-      }}
-    >
+    <div className="position-fixed vh-100 navbar-light side-bar ">
       <div className="mx-3" style={{ marginTop: " 25px" }}>
         <FilterFormRange
           title="Max price"

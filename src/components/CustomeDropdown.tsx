@@ -1,7 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import CustomToggle from "./CustomDropdownToggle";
 import { ReactNode, useContext, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 interface Props {
   children?: ReactNode;
@@ -42,7 +42,7 @@ const CustomeDropdown = ({ children }: Props) => {
           Order history
         </NavLink>
 
-        <NavLink
+        <Link
           to="/"
           className="dropdown-item"
           onClick={() => {
@@ -51,7 +51,7 @@ const CustomeDropdown = ({ children }: Props) => {
           }}
         >
           Log out
-        </NavLink>
+        </Link>
       </Dropdown.Menu>
     </Dropdown>
   );

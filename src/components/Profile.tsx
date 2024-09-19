@@ -13,7 +13,7 @@ const Profile = () => {
   const { logIn } = useContext(UpdateAuthContext);
   if (user) {
     return (
-      <div className="my-4">
+      <div className="my-4 ms-3 ms-lg-0">
         <Tab.Container id="profile-tab" defaultActiveKey="first">
           <Row className="justify-content-center">
             <Col md={2}>

@@ -6,8 +6,9 @@ import { ProductContext } from "../context/ProductContext";
 const ProductPage = () => {
   const { productList } = useContext(ProductContext);
   const { id } = useParams();
-  const productId = Number(id);
-  const product = productList.find((product) => product.id === productId);
+
+  const product = productList.find((product) => product.id === id);
+
   return (
     <div className="d-flex justify-content-center">
       {product ? (
