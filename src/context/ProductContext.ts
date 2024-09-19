@@ -8,7 +8,7 @@ export const ProductContext = createContext<IProductContext>({
   productList: [],
 });
 
-export const FilterProductContext = createContext<IUpdateProductContext>({
+export const UpdateProductContext = createContext<IUpdateProductContext>({
   filterProductList: () => {},
   resetProductList: () => {},
 });

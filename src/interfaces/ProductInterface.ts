@@ -1,4 +1,7 @@
-import { IFilterProducts } from "./SideBarInterface";
+import {
+  FilterActionKind,
+  ProductCategoryKind,
+} from "../enum/productFillterEnum";
 
 export interface IProduct {
   id: string;
@@ -21,4 +24,23 @@ export interface IUpdateProductContext {
 export interface IProductListPage {
   page: number;
   localProductList: IProduct[];
+}
+
+export interface IFilterProducts {
+  categorys: ProductCategoryKind[];
+  priceRange: number;
+}
+
+export interface IFilterCheckProp {
+  value: boolean;
+  filter: ProductCategoryKind;
+}
+
+export interface IFilterAction {
+  type: FilterActionKind;
+  params: IFilterCheckProp | React.ChangeEvent<HTMLInputElement> | undefined;
+}
+
+export interface IUpdateFilterContext {
+  dispatch: React.Dispatch<IFilterAction>;
 }

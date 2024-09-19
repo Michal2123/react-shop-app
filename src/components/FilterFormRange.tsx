@@ -1,3 +1,4 @@
+import React from "react";
 import { Form } from "react-bootstrap";
 
 interface Prop {
@@ -6,9 +7,11 @@ interface Prop {
   handleChangeRange: (arg: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FilterFormRange = ({ title, priceRange, handleChangeRange }: Prop) => {
+const FilterFormRange: React.FunctionComponent<
+  Prop & React.HTMLAttributes<HTMLDivElement>
+> = ({ title, priceRange, handleChangeRange, className }) => {
   return (
-    <Form.Label className="d-flex flex-column">
+    <Form.Label className={`d-flex flex-column ${className}`}>
       <div className="d-flex justify-content-between">
         <span>{title}</span>
         <span>{priceRange}</span>

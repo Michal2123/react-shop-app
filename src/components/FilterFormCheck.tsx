@@ -1,19 +1,29 @@
 import { Form } from "react-bootstrap";
-import { ProductFilterKind } from "../enum/productFillterEnum";
+import { ProductCategoryKind } from "../enum/productFillterEnum";
 
 interface Prop {
   title: string;
-  category: ProductFilterKind;
-  handleChangeCheck: (arg1: boolean, arg2: ProductFilterKind) => void;
+  filterCategorys: ProductCategoryKind[];
+  category: ProductCategoryKind;
+  handleChangeCheck: (arg1: boolean, arg2: ProductCategoryKind) => void;
 }
 
-const FilterFormCheck = ({ title, category, handleChangeCheck }: Prop) => {
+const FilterFormCheck: React.FunctionComponent<
+  Prop & React.HTMLAttributes<HTMLDivElement>
+> = ({ title, category, filterCategorys, handleChangeCheck, className }) => {
+  const isChecked = filterCategorys.find(
+    (filterCategory) => filterCategory === category
+  )
+    ? true
+    : false;
+
   return (
-    <Form.Group className="my-3">
+    <Form.Group className={`${className}`}>
       <Form.Label className="d-flex justify-content-between ">
         {title}
         <Form.Check
           name={category}
+          checked={isChecked}
           onChange={(e) => handleChangeCheck(e.target.checked, category)}
         />
       </Form.Label>

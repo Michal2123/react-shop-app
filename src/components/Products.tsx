@@ -29,7 +29,7 @@ const Products = ({ productList }: Prop) => {
 
   if (paginateList.length) {
     return (
-      <>
+      <div>
         <ProductsList productList={paginateList} />
         {pageCount > 1 ? (
           <Paging
@@ -39,7 +39,7 @@ const Products = ({ productList }: Prop) => {
             setPage={setPage}
           />
         ) : null}
-      </>
+      </div>
     );
   }
 

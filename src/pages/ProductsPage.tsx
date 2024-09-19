@@ -1,14 +1,13 @@
 import { useContext, useEffect } from "react";
 import Products from "../components/Products";
 import {
-  FilterProductContext,
+  UpdateProductContext,
   ProductContext,
 } from "../context/ProductContext";
-import FilterFloatingButton from "../components/FilterFloatingButton";
 
 const ProductsPage = () => {
   const { productList } = useContext(ProductContext);
-  const { resetProductList } = useContext(FilterProductContext);
+  const { resetProductList } = useContext(UpdateProductContext);
   useEffect(() => {
     return () => {
       resetProductList();
@@ -17,7 +16,6 @@ const ProductsPage = () => {
   return (
     <>
       <Products productList={productList} />
-      <FilterFloatingButton />
     </>
   );
 };

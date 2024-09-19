@@ -1,9 +1,8 @@
-import { IProduct } from "../interfaces/ProductInterface";
+import { IFilterProducts, IProduct } from "../interfaces/ProductInterface";
 import {
-  FilterProductContext,
+  UpdateProductContext,
   ProductContext,
 } from "../context/ProductContext";
-import { IFilterProducts } from "../interfaces/SideBarInterface";
 import { ReactNode, useEffect, useState } from "react";
 import { GetAllProducts } from "../service/ProductService";
 
@@ -32,14 +31,14 @@ const ProductProvider = ({ children }: Prop) => {
     };
   }, []);
 
-  function filterProductList({ filters, priceRange }: IFilterProducts) {
+  function filterProductList({ categorys, priceRange }: IFilterProducts) {
     let tempItems: IProduct[];
-    if (filters.length > 0) {
-      tempItems = filters
-        .map((selectedFilter) => {
+    if (categorys.length > 0) {
+      tempItems = categorys
+        .map((selectedCategory) => {
           const temp = fechedData.filter(
             ({ category, price }) =>
-              category === selectedFilter && price <= priceRange
+              category === selectedCategory && price <= priceRange
           );
           return temp;
         })
@@ -58,11 +57,11 @@ const ProductProvider = ({ children }: Prop) => {
 
   return (
     <ProductContext.Provider value={{ productList: productList }}>
-      <FilterProductContext.Provider
+      <UpdateProductContext.Provider
         value={{ filterProductList, resetProductList }}
       >
         {children}
-      </FilterProductContext.Provider>
+      </UpdateProductContext.Provider>
     </ProductContext.Provider>
   );
 };
