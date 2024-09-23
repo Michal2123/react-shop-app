@@ -24,8 +24,8 @@ const SignInForm = () => {
       return;
     }
     SignIn(email, password)
-      .then((user) => {
-        logIn(user);
+      .then((data) => {
+        logIn(data);
         navigate("/");
       })
       .catch((error: Error) => {

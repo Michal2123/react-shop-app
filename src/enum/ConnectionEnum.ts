@@ -6,4 +6,6 @@ export enum ApiEndopnts {
   PRODUCTS = "/products",
   USERS = "/users",
   HISTORY = "/history",
+  REGISTER = "/REGISTER",
+  SIGNIN = "/SIGNIN",
 }

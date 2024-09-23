@@ -3,7 +3,7 @@ import {
   AuthContext,
   UpdateAuthContext,
 } from "../context/AuthenticationContext";
-import { IUser } from "../interfaces/AuthenticationInterface";
+import { IAuthData, IUser } from "../interfaces/AuthenticationInterface";
 
 interface Prop {
   children: ReactNode;
@@ -17,13 +17,15 @@ function getInitialUserState() {
 const AuthenticationProvider = ({ children }: Prop) => {
   const [user, setUser] = useState<IUser | undefined>(getInitialUserState());
 
-  function logIn(user: IUser) {
-    localStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
+  function logIn(authData: IAuthData) {
+    localStorage.setItem("user", JSON.stringify(authData.user));
+    localStorage.setItem("token", JSON.stringify(authData.accessToken));
+    setUser(authData.user);
   }
 
   function logOut() {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
     localStorage.removeItem("history");
     setUser(undefined);
   }

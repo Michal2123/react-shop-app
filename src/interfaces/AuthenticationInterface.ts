@@ -9,11 +9,21 @@ export interface IUser {
   zipCode: string;
 }
 
+export interface IAuthData {
+  accessToken: string;
+  user: IUser;
+}
+
 export interface IAuthContext {
   user: IUser | undefined;
 }
 
 export interface IUpdateAuthContext {
-  logIn: (user: IUser) => void;
+  logIn: (authData: IAuthData) => void;
   logOut: () => void;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
 }

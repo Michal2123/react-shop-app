@@ -235,184 +235,41 @@
   ],
   "history": [
     {
-      "id": "a6b5",
-      "userId": "d704",
-      "date": "6/8/2024 18:38",
-      "orderList": [
-        {
-          "productId": "0",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "2",
-          "name": "tomato",
-          "price": 1,
-          "count": 3
-        },
-        {
-          "productId": "4",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "5",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "49ca",
-      "userId": "d704",
-      "date": "6/8/2024 18:41",
+      "userId": "SkQBDCB",
+      "date": "1/8/2024 15:15",
       "orderList": [
         {
           "productId": "2",
           "name": "tomato",
           "price": 1,
-          "count": 2
+          "count": 4
         },
         {
           "productId": "6",
           "name": "tomato",
           "price": 1,
-          "count": 3
-        },
-        {
-          "productId": "5",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        }
-      ]
-    },
-    {
-      "id": "c91c",
-      "userId": "d704",
-      "date": "0/8/2024 13:25",
-      "orderList": [
-        {
-          "productId": "0",
-          "name": "tomato",
-          "price": 1,
-          "count": 10
-        }
-      ]
-    },
-    {
-      "id": "b717",
-      "userId": "d704",
-      "date": "0/8/2024 13:27",
-      "orderList": [
-        {
-          "productId": "5",
-          "name": "tomato",
-          "price": 1,
-          "count": 3
-        },
-        {
-          "productId": "6",
-          "name": "tomato",
-          "price": 1,
-          "count": 6
-        }
-      ]
-    },
-    {
-      "id": "d549",
-      "userId": "d704",
-      "date": "1/8/2024 13:2",
-      "orderList": [
-        {
-          "productId": "0",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "2",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
+          "count": 4
         },
         {
           "productId": "3",
           "name": "tomato",
           "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "4",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "5",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "6",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "7",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "8",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "9",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "10",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "11",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
-        },
-        {
-          "productId": "12",
-          "name": "tomato",
-          "price": 1,
-          "count": 1
+          "count": 3
         }
-      ]
+      ],
+      "id": 1
     }
   ],
   "users": [
     {
-      "id": "d704",
-      "firstName": "qwe",
-      "lastName": "asd",
-      "email": "abc@email.com",
-      "city": "zxc",
-      "address": "vcx",
-      "zipCode": "12-034",
-      "password": "123",
-      "token": "lshbdfouwegrlqweh2138uelkn"
+      "email": "abc2@email.com",
+      "password": "$2a$10$yz5LBI3uodpEMzzbwYex7./5o333O1/WhOUJcACAjGGwvQIzURMwi",
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "city": "ccc",
+      "address": "ccc",
+      "zipCode": "00-122",
+      "id": "SkQBDCB"
     }
   ]
 }

@@ -6,7 +6,7 @@ import OrderDetails from "../components/OrderDetails";
 const OrderPage = () => {
   const { history } = useContext(HistoryContext);
   const { id } = useParams();
-  const order = history.find((order) => order.id === id);
+  const order = history.find((order) => order.id == id);
   return (
     <>
       {order ? (

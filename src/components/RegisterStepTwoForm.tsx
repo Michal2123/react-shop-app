@@ -3,7 +3,6 @@ import { Button, Form } from "react-bootstrap";
 import ValidateFormInput from "./ValidateFormInput";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
-import { IUser } from "../interfaces/AuthenticationInterface";
 import { Register } from "../service/RegisterService";
 import { IRegisterData } from "../interfaces/RegisterInterface";
 import { zipCodeValidation } from "../utlis/InputValidation";
@@ -34,8 +33,7 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
 
     setIsLoading(true);
     Register(registerData)
-      .then((response) => response.json())
-      .then((user: IUser) => logIn(user))
+      .then((data) => logIn(data))
       .catch((error) => {
         alert("Something went wrong :(");
         console.log(error);

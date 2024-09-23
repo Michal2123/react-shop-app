@@ -16,7 +16,7 @@ const ProductsLayout = () => {
     <div className="d-flex">
       <ProductFilterProvider>
         <Sidebar />
-        <div className="products-layout-content">
+        <div className="products-layout-content w-100">
           <ProductFilterPopup
             showPopup={showPopup}
             updatePopupState={updatePopupState}
