@@ -3,12 +3,14 @@ import ValidateFormInput from "./ValidateFormInput";
 import { useState } from "react";
 import { UpdatePassword } from "../service/ProfileService";
 import { IUser } from "../interfaces/AuthenticationInterface";
+import { useError } from "./ErrorProvider";
 
 interface Prop {
   user: IUser;
 }
 
 const ProfilePasswordTab = ({ user }: Prop) => {
+  const { clearErrorMessage, handleError } = useError();
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [validated, setValidated] = useState(false);
@@ -27,12 +29,20 @@ const ProfilePasswordTab = ({ user }: Prop) => {
 
     setIsLoading(true);
     UpdatePassword(password, user.id)
-      .then(() => {
+      .then((response) => {
+        clearErrorMessage();
+        if (!response.ok) {
+          throw new Error(`${response.status}`);
+        }
         alert("Password has been updated.");
         setPassword("");
         setRepeatPassword("");
         setValidated(false);
         setIsPasswordValid(false);
+      })
+      .catch((error: Error) => {
+        clearErrorMessage();
+        handleError(error.message, "Unable to update passowrd.");
       })
       .finally(() => {
         setIsLoading(false);

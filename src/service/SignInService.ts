@@ -15,6 +15,14 @@ export async function SignIn(
       password,
     }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        if (response.status === 400) {
+          throw new Error("Wrong email or password.");
+        }
+        throw new Error("Unable to login.");
+      }
+      return response.json();
+    })
     .then((data: IAuthData) => data);
 }

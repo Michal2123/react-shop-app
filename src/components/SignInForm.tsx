@@ -4,12 +4,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import ValidateFormInput from "./ValidateFormInput";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 import { SignIn } from "../service/SignInService";
+import { useError } from "./ErrorProvider";
 
 const SignInForm = () => {
   const { logIn } = useContext(UpdateAuthContext);
+  const { errorMessage, clearErrorMessage, handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
   const [validated, setValidated] = useState(false);
-  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,13 +26,13 @@ const SignInForm = () => {
     }
     SignIn(email, password)
       .then((data) => {
+        clearErrorMessage();
         logIn(data);
         navigate("/");
       })
       .catch((error: Error) => {
-        alert("Something went wrong :(");
-        console.log(error);
-        setError(error.message);
+        clearErrorMessage();
+        handleError("", error.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -69,11 +70,13 @@ const SignInForm = () => {
             setPassword(v);
           }}
         />
-        {!!error.length ? (
+        {errorMessage ?? (
           <Form.Group className="mb-2" style={{ textAlign: "center" }}>
-            <Form.Text style={{ color: "rgb(220, 53, 69)" }}>{error}</Form.Text>
+            <Form.Text style={{ color: "rgb(220, 53, 69)" }}>
+              {errorMessage}
+            </Form.Text>
           </Form.Group>
-        ) : null}
+        )}
 
         <Form.Group className="mb-3" style={{ textAlign: "center" }}>
           <Form.Text>

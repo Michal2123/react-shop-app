@@ -9,4 +9,5 @@ export const AuthContext = createContext<IAuthContext>({ user: undefined });
 export const UpdateAuthContext = createContext<IUpdateAuthContext>({
   logIn: () => undefined,
   logOut: () => undefined,
+  updateUser: () => undefined,
 });

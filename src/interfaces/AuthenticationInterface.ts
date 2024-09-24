@@ -21,6 +21,7 @@ export interface IAuthContext {
 export interface IUpdateAuthContext {
   logIn: (authData: IAuthData) => void;
   logOut: () => void;
+  updateUser: (user: IUser) => void;
 }
 
 export interface ILogin {

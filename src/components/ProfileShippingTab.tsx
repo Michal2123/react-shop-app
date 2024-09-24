@@ -5,14 +5,17 @@ import { IShippingDetails } from "../interfaces/ProfileInterface";
 import { UpdateShippingDetails } from "../service/ProfileService";
 import { zipCodeValidation } from "../utlis/InputValidation";
 import { IUser } from "../interfaces/AuthenticationInterface";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UpdateAuthContext } from "../context/AuthenticationContext";
+import { useError } from "./ErrorProvider";
 
 interface Prop {
   user: IUser;
-  updateUser: (user: IUser) => void;
 }
 
-const ProfileShippingTab = ({ user, updateUser }: Prop) => {
+const ProfileShippingTab = ({ user }: Prop) => {
+  const { updateUser } = useContext(UpdateAuthContext);
+  const { clearErrorMessage, handleError } = useError();
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [zipCodeErrorMessage, setzipCodeErrorMessage] = useState("");
@@ -57,12 +60,21 @@ const ProfileShippingTab = ({ user, updateUser }: Prop) => {
 
     setIsLoading(true);
     UpdateShippingDetails(shippingDetails, user.id)
-      .then((_) => {
+      .then((response) => {
+        clearErrorMessage();
+        if (!response.ok) {
+          throw new Error(`${response.status}`);
+        }
         alert("Shipping details has been updated.");
         updateUser({
           ...user,
           ...shippingDetails,
         });
+      })
+      .catch((error: Error) => {
+        clearErrorMessage();
+        setshippingDetails(shippingDetails);
+        handleError(error.message, "Unable to save shipping details.");
       })
       .finally(() => {
         setIsLoading(false);

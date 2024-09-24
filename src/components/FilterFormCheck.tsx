@@ -18,7 +18,7 @@ const FilterFormCheck: React.FunctionComponent<
     : false;
 
   return (
-    <Form.Group className={`${className}`}>
+    <Form.Group className={className}>
       <Form.Label className="d-flex justify-content-between ">
         {title}
         <Form.Check

@@ -6,6 +6,7 @@ import { UpdateAuthContext } from "../context/AuthenticationContext";
 import { Register } from "../service/RegisterService";
 import { IRegisterData } from "../interfaces/RegisterInterface";
 import { zipCodeValidation } from "../utlis/InputValidation";
+import { useError } from "./ErrorProvider";
 
 interface Prop {
   registerData: IRegisterData;
@@ -14,6 +15,7 @@ interface Prop {
 
 const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
   const { logIn } = useContext(UpdateAuthContext);
+  const { clearErrorMessage, handleError } = useError();
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [zipCodeErrorMessage, setzipCodeErrorMessage] = useState("");
@@ -33,14 +35,16 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
 
     setIsLoading(true);
     Register(registerData)
-      .then((data) => logIn(data))
-      .catch((error) => {
-        alert("Something went wrong :(");
-        console.log(error);
+      .then((data) => {
+        clearErrorMessage();
+        logIn(data);
+        navigate("/");
+      })
+      .catch((error: Error) => {
+        handleError(error.message, "Unable to register.");
       })
       .finally(() => {
         setIsLoading(false);
-        navigate("/");
       });
   }
 

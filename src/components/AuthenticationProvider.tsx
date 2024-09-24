@@ -18,9 +18,8 @@ const AuthenticationProvider = ({ children }: Prop) => {
   const [user, setUser] = useState<IUser | undefined>(getInitialUserState());
 
   function logIn(authData: IAuthData) {
-    localStorage.setItem("user", JSON.stringify(authData.user));
     localStorage.setItem("token", JSON.stringify(authData.accessToken));
-    setUser(authData.user);
+    updateUser(authData.user);
   }
 
   function logOut() {
@@ -30,9 +29,14 @@ const AuthenticationProvider = ({ children }: Prop) => {
     setUser(undefined);
   }
 
+  function updateUser(user: IUser) {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  }
+
   return (
     <AuthContext.Provider value={{ user: user }}>
-      <UpdateAuthContext.Provider value={{ logIn, logOut }}>
+      <UpdateAuthContext.Provider value={{ logIn, logOut, updateUser }}>
         {children}
       </UpdateAuthContext.Provider>
     </AuthContext.Provider>

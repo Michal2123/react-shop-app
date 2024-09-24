@@ -3,14 +3,11 @@ import ProfileShippingTab from "./ProfileShippingTab";
 import ProfileEmailTab from "./ProfileEmailTab";
 import ProfilePasswordTab from "./ProfilePasswordTab";
 import { useContext } from "react";
-import {
-  AuthContext,
-  UpdateAuthContext,
-} from "../context/AuthenticationContext";
+import { AuthContext } from "../context/AuthenticationContext";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const { logIn } = useContext(UpdateAuthContext);
+
   if (user) {
     return (
       <div className="my-4 ms-3 ms-lg-0">
@@ -32,10 +29,10 @@ const Profile = () => {
             <Col md={4}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <ProfileShippingTab user={user} updateUser={logIn} />
+                  <ProfileShippingTab user={user} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <ProfileEmailTab user={user} updateUser={logIn} />
+                  <ProfileEmailTab user={user} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="third">
                   <ProfilePasswordTab user={user} />

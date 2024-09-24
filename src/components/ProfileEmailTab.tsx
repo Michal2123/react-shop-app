@@ -1,15 +1,18 @@
 import { Button, Form } from "react-bootstrap";
 import ValidateFormInput from "./ValidateFormInput";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UpdateEmail } from "../service/ProfileService";
 import { IUser } from "../interfaces/AuthenticationInterface";
+import { UpdateAuthContext } from "../context/AuthenticationContext";
+import { useError } from "./ErrorProvider";
 
 interface Prop {
   user: IUser;
-  updateUser: (user: IUser) => void;
 }
 
-const ProfileEmailTab = ({ user, updateUser }: Prop) => {
+const ProfileEmailTab = ({ user }: Prop) => {
+  const { updateUser } = useContext(UpdateAuthContext);
+  const { clearErrorMessage, handleError } = useError();
   const userEmail = user.email;
   const [email, setEmail] = useState(userEmail);
   const [validated, setValidated] = useState(false);
@@ -26,12 +29,21 @@ const ProfileEmailTab = ({ user, updateUser }: Prop) => {
 
     setIsLoading(true);
     UpdateEmail(email, user.id)
-      .then((_) => {
+      .then((response) => {
+        clearErrorMessage();
+        if (!response.ok) {
+          throw new Error(`${response.status}`);
+        }
         alert("Email address has been updated.");
         updateUser({
           ...user,
           email,
         });
+      })
+      .catch((error: Error) => {
+        clearErrorMessage();
+        setEmail(userEmail);
+        handleError(error.message, "Unable to update email address.");
       })
       .finally(() => setIsLoading(false));
   }

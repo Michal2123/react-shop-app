@@ -8,6 +8,7 @@ interface Prop {
 
 const NavbarSearchDropdown = ({ searchList }: Prop) => {
   const navigator = useNavigate();
+
   return (
     <>
       <div className="search-list">
