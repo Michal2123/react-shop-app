@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { IProduct } from "../interfaces/ProductInterface";
-import { useContext } from "react";
-import { UpdateCartContext } from "../context/CartContext";
-import { CartActionKind } from "../enum/CartEnum";
+import ProductBuyButton from "./ProductBuyButton";
 
 interface Prop {
   product: IProduct;
 }
 
 const Product = ({ product }: Prop) => {
-  const { dispatch } = useContext(UpdateCartContext);
-  function handleClickBuy() {
-    dispatch({ type: CartActionKind.ADD, product });
-  }
   return (
     <div className="card shadow-sm mx-3 my-2">
       <div className="row g-0 align-items-center">
@@ -33,7 +27,7 @@ const Product = ({ product }: Prop) => {
             <p>Category: {product.category}</p>
             <p>Price: {product.price} PLN</p>
             <div className="d-flex justify-content-between">
-              <Button onClick={handleClickBuy}>Buy</Button>
+              <ProductBuyButton product={product} overlayPlacment="top" />
               <Link to={`${product.id}`}>
                 <Button className="btn btn-secondary">Details</Button>
               </Link>

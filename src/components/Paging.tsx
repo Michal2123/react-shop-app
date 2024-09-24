@@ -8,11 +8,16 @@ interface Prop {
 }
 
 const Paging = ({ page, maxVisiblePages, maxPageCount, setPage }: Prop) => {
-  let startPageListIndex = page;
-  if (maxPageCount - 2 && page + 2 > maxPageCount) {
-    startPageListIndex = maxPageCount - 2;
-  } else if (page - 1 === 1) {
-    startPageListIndex = 1;
+  let startPageListIndex = 1;
+  if (maxVisiblePages < maxPageCount) {
+    startPageListIndex = page;
+    if (maxPageCount - 2 && page + 2 > maxPageCount) {
+      startPageListIndex = maxPageCount - 2;
+    } else if (page - 1 <= 1) {
+      startPageListIndex = 1;
+    } else {
+      startPageListIndex = page - 1;
+    }
   }
 
   function handleClickPage(page: number) {
