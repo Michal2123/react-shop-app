@@ -23,14 +23,8 @@ const HistoryProvider = ({ children }: Prop) => {
   const { user } = useContext(AuthContext);
   useEffect(() => {
     let didFetch = false;
-    if (!history.length && user) {
-      GetOrderHistory(user.id)
-        .then((data) => {
-          if (!didFetch) {
-            updateHistory(data);
-          }
-        })
-        .catch((error: Error) => console.log(error));
+    if (!history.length && !didFetch && user) {
+      getUserHistory(user.id);
     }
     return () => {
       didFetch = true;
@@ -42,9 +36,17 @@ const HistoryProvider = ({ children }: Prop) => {
     setHistory(data);
   }
 
+  function getUserHistory(userId: string) {
+    GetOrderHistory(userId)
+      .then((data) => {
+        updateHistory(data);
+      })
+      .catch((error: Error) => console.log(error));
+  }
+
   return (
     <HistoryContext.Provider value={{ history }}>
-      <UpdateHistoryContext.Provider value={{ updateHistory }}>
+      <UpdateHistoryContext.Provider value={{ updateHistory, getUserHistory }}>
         {children}
       </UpdateHistoryContext.Provider>
     </HistoryContext.Provider>

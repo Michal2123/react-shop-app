@@ -5,9 +5,11 @@ import ValidateFormInput from "./ValidateFormInput";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 import { SignIn } from "../service/SignInService";
 import { useError } from "./ErrorProvider";
+import { UpdateHistoryContext } from "../context/HostoryContext";
 
 const SignInForm = () => {
   const { logIn } = useContext(UpdateAuthContext);
+  const { getUserHistory } = useContext(UpdateHistoryContext);
   const { errorMessage, clearErrorMessage, handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -28,6 +30,7 @@ const SignInForm = () => {
       .then((data) => {
         clearErrorMessage();
         logIn(data);
+        getUserHistory(data.user.id);
         navigate("/");
       })
       .catch((error: Error) => {

@@ -20,7 +20,6 @@ const Products = ({ productList }: Prop) => {
   const pageCount = Math.ceil(
     productList.length / ProductListPage.ITEMSPERPAGE
   );
-
   const paginateList: IProduct[] = calcItemsPerPage(
     prevList,
     page,

@@ -8,3 +8,6 @@
     margin-top: 75px;
     flex: 1;
 }
+.form-control:focus{
+    box-shadow: 0 0 0 ;
+}

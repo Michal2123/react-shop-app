@@ -10,4 +10,5 @@ export const HistoryContext = createContext<IHistoryContext>({
 
 export const UpdateHistoryContext = createContext<IUpdateHistoryContext>({
   updateHistory: () => {},
+  getUserHistory: () => {},
 });

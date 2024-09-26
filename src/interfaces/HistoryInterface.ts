@@ -24,4 +24,5 @@ export interface IHistoryContext {
 
 export interface IUpdateHistoryContext {
   updateHistory: (arg: IGetHistoryItem[]) => void;
+  getUserHistory: (arg: string) => void;
 }

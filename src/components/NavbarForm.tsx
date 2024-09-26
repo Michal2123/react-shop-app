@@ -31,7 +31,7 @@ const NavbarForm = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           type="search"
-          className="shadow-none rounded-0 input-nav-search h-100"
+          className="shadow-none rounded-0 input-nav-search"
         />
       </InputGroup>
       {searchList.length && focused ? (
