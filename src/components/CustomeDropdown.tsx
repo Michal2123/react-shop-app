@@ -1,24 +1,31 @@
 import { Dropdown } from "react-bootstrap";
 import CustomToggle from "./CustomDropdownToggle";
-import { ReactNode, useContext, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { ReactNode, useContext, useRef, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UpdateAuthContext } from "../context/AuthenticationContext";
 interface Props {
   children?: ReactNode;
 }
 const CustomeDropdown = ({ children }: Props) => {
   const { logOut } = useContext(UpdateAuthContext);
+  const [show, setShow] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const dropdownMenuRef = useRef<HTMLDivElement | null>(null);
 
-  function handleClickCloseDropdown() {
-    dropdownRef.current?.classList.remove("show");
-    dropdownMenuRef.current?.classList.remove("show");
+  const navigator = useNavigate();
+
+  function handleClickCloseDropdown(route: string) {
+    navigator(route);
+    setShow(!show);
   }
 
   return (
-    <Dropdown ref={dropdownRef}>
-      <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+    <Dropdown ref={dropdownRef} show={show} onBlur={() => setShow(false)}>
+      <Dropdown.Toggle
+        onClick={() => setShow(!show)}
+        as={CustomToggle}
+        id="dropdown-custom-components"
+      >
         {children}
       </Dropdown.Toggle>
 
@@ -28,7 +35,7 @@ const CustomeDropdown = ({ children }: Props) => {
           className={({ isActive }) =>
             `dropdown-item ${isActive ? "active" : ""}`
           }
-          onClick={handleClickCloseDropdown}
+          onMouseDown={() => handleClickCloseDropdown("/profile")}
         >
           Profile
         </NavLink>
@@ -37,7 +44,7 @@ const CustomeDropdown = ({ children }: Props) => {
           className={({ isActive }) =>
             `dropdown-item ${isActive ? "active" : ""}`
           }
-          onClick={handleClickCloseDropdown}
+          onMouseDown={() => handleClickCloseDropdown("/history")}
         >
           Order history
         </NavLink>
@@ -45,8 +52,8 @@ const CustomeDropdown = ({ children }: Props) => {
         <Link
           to="/"
           className="dropdown-item"
-          onClick={() => {
-            handleClickCloseDropdown();
+          onMouseDown={() => {
+            handleClickCloseDropdown("/");
             logOut();
           }}
         >

@@ -1,5 +1,7 @@
 import { Button, Card } from "react-bootstrap";
 import ProductsFilters from "./ProductFilters";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   showPopup: boolean;
@@ -7,6 +9,7 @@ interface Prop {
 }
 
 const ProductFilterPopup = ({ showPopup, updatePopupState }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   return (
     <>
       {showPopup ? (
@@ -15,7 +18,7 @@ const ProductFilterPopup = ({ showPopup, updatePopupState }: Prop) => {
             className="filter-popup-content  mx-auto"
             style={{ width: "400px" }}
           >
-            <Card>
+            <Card className={`${isDark ? "dark" : "light"}`}>
               <div className="d-flex justify-content-end m-3">
                 <Button className="btn-danger" onClick={updatePopupState}>
                   X

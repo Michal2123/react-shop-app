@@ -7,6 +7,7 @@ import { Register } from "../service/RegisterService";
 import { IRegisterData } from "../interfaces/RegisterInterface";
 import { zipCodeValidation } from "../utlis/InputValidation";
 import { useError } from "./ErrorProvider";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   registerData: IRegisterData;
@@ -15,6 +16,7 @@ interface Prop {
 
 const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
   const { logIn } = useContext(UpdateAuthContext);
+  const { isDark } = useContext(ThemeContext);
   const { clearErrorMessage, handleError } = useError();
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +51,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
   }
 
   return (
-    <div className="card p-3 my-2 ">
+    <div
+      className={`card ${isDark ? "dark" : "light"} p-3 my-2`}
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
+    >
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
           <h4 style={{ textAlign: "center" }}>Register</h4>
@@ -112,7 +117,10 @@ const RegisterStepTwoForm = ({ registerData, updateRegisterData }: Prop) => {
           <Form.Text>
             Already have account?
             <NavLink
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{
+                color: `${isDark ? "darkcyan" : "blue"}`,
+                cursor: "pointer",
+              }}
               to={"/signin"}
             >
               {" "}

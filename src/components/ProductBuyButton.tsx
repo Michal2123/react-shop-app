@@ -7,7 +7,7 @@ import { Placement } from "@popperjs/core/lib/enums";
 
 interface Prop {
   product: IProduct;
-  overlayPlacment: Placement | undefined;
+  overlayPlacment?: Placement;
 }
 
 const ProductBuyButton: React.FunctionComponent<

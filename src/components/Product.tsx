@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { IProduct } from "../interfaces/ProductInterface";
 import ProductBuyButton from "./ProductBuyButton";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   product: IProduct;
 }
 
 const Product = ({ product }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   return (
-    <div className="card shadow-sm mx-3 my-2">
+    <div className={`card ${isDark ? "dark" : "light"} shadow-sm mx-3 my-2`}>
       <div className="row g-0 align-items-center">
         <div className="col-md">
           <img

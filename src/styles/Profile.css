@@ -1,5 +1,12 @@
+:root{
+    --color-light: #212529;
+    --nav-link-light-border: 1px solid rgba(0, 0, 0, 1);
+    --color-dark: rgb(97, 97, 97);
+    --nav-link-dark-border:1px solid rgb(97, 97, 97);
+    --input-border-focus: 1px solid rgb(158, 197, 254);
+}
+
 .nav-link{
-    color: black;
     font-size: 22px;
     font-weight: 500;
     max-width:300px;
@@ -8,18 +15,32 @@
     -ms-transition: .15s; 
 }
 
-.nav-link:hover{
-    color: black;
-    border: 1px solid rgba(0, 0, 0, 1);
+.nav-link[data-theme="dark"]{
+    color: var(--color-dark);
 }
 
-.nav-link:hover:active{
-    border: 1px solid rgba(0, 0, 0, 1);
+.nav-link[data-theme="light"]{
+    color: var(--color-light);
 }
 
-.nav-link.active{ 
-    color: black;
-    border: 1px solid rgba(0, 0, 0, 1);
+.nav-link[data-theme="light"]:hover{
+    color: var(--color-light);
+    border: var(--nav-link-light-border);
+}
+
+.nav-link[data-theme="light"].active{ 
+    color: var(--color-light);
+    border: var(--nav-link-light-border);
+}
+
+.nav-link[data-theme="dark"]:hover{
+    color: var(--color-dark);
+    border: var(--nav-link-dark-border);
+}
+
+.nav-link[data-theme="dark"].active{ 
+    color: var(--color-dark);
+    border: var(--nav-link-dark-border);
 }
 
 .input-form{
@@ -32,10 +53,15 @@
     -ms-transition: .15s; 
 }
 
+.input-label.dark{
+    color: var(--color-dark);
+}
+
 .input-form:focus{
-    border: 1px solid rgb(158, 197, 254);
+    border: var(--input-border-focus);
     border-radius: 0;
     box-shadow: none;
     cursor: auto;
 }
+
 

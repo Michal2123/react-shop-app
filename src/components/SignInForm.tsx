@@ -6,10 +6,12 @@ import { UpdateAuthContext } from "../context/AuthenticationContext";
 import { SignIn } from "../service/SignInService";
 import { useError } from "./ErrorProvider";
 import { UpdateHistoryContext } from "../context/HostoryContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 const SignInForm = () => {
   const { logIn } = useContext(UpdateAuthContext);
   const { getUserHistory } = useContext(UpdateHistoryContext);
+  const { isDark } = useContext(ThemeContext);
   const { errorMessage, clearErrorMessage, handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -43,7 +45,10 @@ const SignInForm = () => {
   }
 
   return (
-    <div className="card p-3 my-2">
+    <div
+      className={`card ${isDark ? "dark" : "light"} p-3 my-2`}
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
+    >
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
           <h4 style={{ textAlign: "center" }}>Sign In</h4>
@@ -85,7 +90,10 @@ const SignInForm = () => {
           <Form.Text>
             Don't have account?
             <NavLink
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{
+                color: `${isDark ? "darkcyan" : "blue"}`,
+                cursor: "pointer",
+              }}
               to={"/register"}
             >
               {" "}

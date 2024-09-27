@@ -68,7 +68,7 @@ const CartOrderPreview = ({ cartList, shippingDetails }: Prop) => {
     alert(
       `Thank you for choosing Green Farm.\nOrder will be send as soon as posible.`
     );
-    dispatch({ type: CartActionKind.CLEARCART, product: undefined });
+    dispatch({ type: CartActionKind.CLEARCART });
     navigator("/");
   }
 

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ValidateFormInput from "./ValidateFormInput";
 import { zipCodeValidation } from "../utlis/InputValidation";
 import { IShippingDetails } from "../interfaces/ProfileInterface";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   shippingDetails: IShippingDetails;
@@ -15,6 +16,7 @@ const CartShippingForm = ({
   shippingDetails,
   setStep,
 }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   const [validated, setValidated] = useState(false);
   const [zipCodeErrorMessage, setzipCodeErrorMessage] = useState("");
 
@@ -46,7 +48,11 @@ const CartShippingForm = ({
   }
 
   return (
-    <div className="card p-3 my-5 mx-auto" style={{ maxWidth: "400px" }}>
+    <div
+      className={`card ${isDark ? "dark" : "light"} p-3 my-5 mx-auto`}
+      style={{ maxWidth: "400px" }}
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
+    >
       <Form
         className="mx-auto"
         noValidate

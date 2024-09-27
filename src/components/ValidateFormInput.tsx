@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Form } from "react-bootstrap";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   className?: string | undefined;
@@ -27,10 +29,13 @@ const ValidateFormInput = ({
   disabled,
   onChange,
 }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   return (
     <Form.Group className="my-2">
       <Form.Label style={{ fontWeight: "500" }}>
-        {label}
+        <div className={`input-label ${isDark ? "dark" : "light"}`}>
+          {label}
+        </div>
         <Form.Control
           name={name}
           className={className}

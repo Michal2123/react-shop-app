@@ -11,3 +11,17 @@
 .form-control:focus{
     box-shadow: 0 0 0 ;
 }
+
+.light-theme{
+    background-color: rgb(255, 255, 243);
+}
+
+.dark-theme{
+    background-color: rgb(24, 24, 24);
+    color: rgb(243, 243, 243);
+}
+
+.card.dark{
+    background-color: rgb(48, 48, 48);
+    color: rgb(243, 243, 243);
+}

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import ValidateFormInput from "./ValidateFormInput";
 import { IRegisterData } from "../interfaces/RegisterInterface";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   registerData: IRegisterData;
@@ -15,6 +16,7 @@ const RegisterStepOneForm = ({
   handleNextStep,
   updateRegisterData,
 }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   const [repeatPassword, setRepeatPassword] = useState("");
   const [validated, setValidated] = useState(false);
 
@@ -33,7 +35,10 @@ const RegisterStepOneForm = ({
   }
 
   return (
-    <div className="card p-3 my-2 ">
+    <div
+      className={`card ${isDark ? "dark" : "light"} p-3 my-2`}
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
+    >
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
           <h4 style={{ textAlign: "center" }}>Register</h4>
@@ -70,7 +75,10 @@ const RegisterStepOneForm = ({
           <Form.Text>
             Already have account?
             <NavLink
-              style={{ color: "blue", cursor: "pointer" }}
+              style={{
+                color: `${isDark ? "darkcyan" : "blue"}`,
+                cursor: "pointer",
+              }}
               to={"/signin"}
             >
               {" "}

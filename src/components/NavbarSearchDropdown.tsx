@@ -1,17 +1,20 @@
+import { useContext } from "react";
 import { IProduct } from "../interfaces/ProductInterface";
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   searchList: IProduct[];
 }
 
 const NavbarSearchDropdown = ({ searchList }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   const navigator = useNavigate();
 
   return (
     <>
-      <div className="search-list">
+      <div className={`search-list ${isDark ? "dark" : "light"}`}>
         {searchList
           .map((product) => (
             <div

@@ -17,6 +17,7 @@ import RestrictedRout from "./components/RestrictedRout";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrderPage from "./pages/OrderPage";
+import MainLayoutProviders from "./components/MainLayoutProviders";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,7 +41,11 @@ function App() {
       </Route>
     )
   );
-  return <RouterProvider router={router} />;
+  return (
+    <MainLayoutProviders>
+      <RouterProvider router={router} />
+    </MainLayoutProviders>
+  );
 }
 
 export default App;

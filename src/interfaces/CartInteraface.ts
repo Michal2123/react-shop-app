@@ -3,7 +3,7 @@ import { CartActionKind } from "../enum/CartEnum";
 
 export interface ICartAction {
   type: CartActionKind;
-  product: IProduct | undefined;
+  product?: IProduct;
 }
 
 export interface ICartItem {

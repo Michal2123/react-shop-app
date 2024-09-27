@@ -4,25 +4,46 @@ import ProfileEmailTab from "./ProfileEmailTab";
 import ProfilePasswordTab from "./ProfilePasswordTab";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthenticationContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  const { isDark } = useContext(ThemeContext);
 
   if (user) {
     return (
-      <div className="my-4 ms-3 ms-lg-0">
+      <div
+        className="my-4 ms-3 ms-lg-0"
+        data-bs-theme={`${isDark ? "dark" : "light"}`}
+        data-theme={`${isDark ? "dark" : "light"}`}
+      >
         <Tab.Container id="profile-tab" defaultActiveKey="first">
-          <Row className="justify-content-center">
+          <Row className="justify-content-center m-0">
             <Col md={2}>
               <Nav className="flex-column">
-                <Nav.Item className="my-1">
-                  <Nav.Link eventKey="first">Shipping details</Nav.Link>
+                <Nav.Item className={`my-1`}>
+                  <Nav.Link
+                    eventKey="first"
+                    data-theme={`${isDark ? "dark" : "light"}`}
+                  >
+                    Shipping details
+                  </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="my-1">
-                  <Nav.Link eventKey="second">Change email</Nav.Link>
+                  <Nav.Link
+                    eventKey="second"
+                    data-theme={`${isDark ? "dark" : "light"}`}
+                  >
+                    Change email
+                  </Nav.Link>
                 </Nav.Item>
                 <Nav.Item className="my-1">
-                  <Nav.Link eventKey="third">Change password</Nav.Link>
+                  <Nav.Link
+                    eventKey="third"
+                    data-theme={`${isDark ? "dark" : "light"}`}
+                  >
+                    Change password
+                  </Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>

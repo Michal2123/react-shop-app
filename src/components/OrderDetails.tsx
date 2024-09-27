@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { IGetHistoryItem } from "../interfaces/HistoryInterface";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   order: IGetHistoryItem;
 }
 
 const OrderDetails = ({ order }: Prop) => {
+  const { isDark } = useContext(ThemeContext);
   return (
     <>
       <div className="mt-4 mb-2 px-3 mx-auto" style={{ maxWidth: "500px" }}>
-        <div className="card p-4 w-100">
+        <div className={`card ${isDark ? "dark" : "light"} p-4 w-100`}>
           <h2>{order.date}</h2>
           <br />
           <ul>

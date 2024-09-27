@@ -1,8 +1,14 @@
 .sidebar-ligth{
-    /* background-color: rgb(185, 207, 103); */
     background-color: rgb(224, 225, 191);
     border: 1px solid rgb(190, 190, 190);
     z-index: 0;
+}
+
+.sidebar-dark{
+    background-color: rgb(24, 24, 24);
+    border-right: 1px solid rgb(190, 190, 190);
+    z-index: 0;
+    color: white;
 }
 
 .products-layout-content{

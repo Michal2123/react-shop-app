@@ -5,12 +5,19 @@ import NavbarForm from "./NavbarForm";
 import NavbarButton from "./NavbarButton";
 import NavbarCart from "./NavbarCart";
 import NavbarUserDropdown from "./NavbarUserDropdown";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import NavbarThemeSwitch from "./NavbarThemeSwitch";
 
 const NavigationBar = () => {
+  const { isDark } = useContext(ThemeContext);
   return (
     <Navbar
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
+      variant={`${isDark ? "dark" : "light"}`}
       expand={"md"}
-      className="justify-content-between navbar-expand-lg shadow-sm q"
+      className="justify-content-between navbar-expand-lg shadow-sm q 
+      "
       fixed="top"
     >
       <Navbar.Brand className="d-flex mx-0 p-0" style={{ width: "35%" }}>
@@ -28,6 +35,7 @@ const NavigationBar = () => {
         </Nav>
 
         <Nav className="me-4">
+          <NavbarThemeSwitch />
           <NavbarButton title="Product" route="/products" />
           <NavbarCart />
           <NavbarUserDropdown />

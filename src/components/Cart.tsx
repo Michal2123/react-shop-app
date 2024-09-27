@@ -3,6 +3,7 @@ import { ICartItem } from "../interfaces/CartInteraface";
 import CartItem from "./CartItem";
 import { Button } from "react-bootstrap";
 import { AuthContext } from "../context/AuthenticationContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface Prop {
   cartList: ICartItem[];
@@ -11,6 +12,7 @@ interface Prop {
 
 const Cart = ({ cartList, setStep }: Prop) => {
   const { user } = useContext(AuthContext);
+  const { isDark } = useContext(ThemeContext);
 
   const totalPrice = cartList.reduce(
     (sumValue, item) => sumValue + item.count * item.product.price,
@@ -26,7 +28,7 @@ const Cart = ({ cartList, setStep }: Prop) => {
   }
 
   return (
-    <div className="card w-50 mx-auto my-5">
+    <div className={`card ${isDark ? "dark" : "light"} w-50 mx-auto my-5`}>
       <div className="card-body row row-col-2 row-col-md-2 row-col-lg-3">
         {cartList.map(({ product, count }) => (
           <CartItem key={product.id} product={product} count={count} />

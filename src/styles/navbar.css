@@ -1,18 +1,33 @@
+:root{
+    --bg-light: rgb(224, 225, 191);
+    --color-light: #212529;
+    --btn-bg-light-active-class: white;
+    --btn-bg-light-hover: rgb(245, 247, 247);
+    --btn-bg-light-active: rgb(240, 238, 238);
+    --bg-dark: rgb(24, 24, 24);
+    --color-dark: rgb(97, 97, 97);
+    --btn-nav-bg-dark-active-class: rgb(47, 51, 56);
+    --btn-nav-bg-dark-hover: rgb(33, 37, 41);
+    --btn-nav-bg-dark-active: rgb(67, 73, 80);
+    --btn-bordr: 1px solid black;
+    --input-border-focus: 1px solid rgb(158, 197, 254);
+    --list-item-bg-hover: rgb(171, 226, 120);
+}
+
 
 .navbar-dark{
-    background-color: rgb(118, 120, 47);
+    background-color: var(--bg-dark);
     color: white;
 }
 
 .navbar-light{
-    background-color: rgb(224, 225, 191);
+    background-color: var(--bg-light);
 }
 
 
-.custome-btn-nav{
+.custome-btn-nav.light,.custome-btn-nav.dark{
     min-width: 90px;
     height: 40px;
-    color: #212529;
     background-color: transparent;
     border: none;
     font-size: 24px;
@@ -23,51 +38,60 @@
     -ms-transition: .15s
 }
 
-.custome-btn-nav.search, .custome-btn-nav.active{
-    background-color: white;
-    border: 1px solid black;
+.light{
+    color: var(--color-light);
 }
 
 
-.custome-btn-nav:hover  {
-    background-color: rgb(245, 247, 247);
-    border: 1px solid black;
+.dark{
+    color: var(--color-dark);
+}
+
+
+.custome-btn-nav.light.active{
+    background-color: var(--btn-bg-light-active-class);
+    border: var(--btn-bordr);
+}
+
+
+.custome-btn-nav.light:hover  {
+    background-color: var( --btn-bg-light-hover);
+    border: var(--btn-bordr);
 
 }
 
-.custome-btn-nav:active  {
-    background-color: rgb(240, 238, 238);
+.custome-btn-nav.light:active  {
+    background-color: var(--btn-bg-light-active);
+}
+
+.custome-btn-nav.dark.active{
+    background-color: var(--btn-nav-bg-dark-active-class);
+    border: var(--btn-bordr);
+}
+
+
+.custome-btn-nav.dark:hover  {
+    background-color: var(--btn-nav-bg-dark-hover);
+    border: var(--btn-bordr);
+
+}
+
+.custome-btn-nav.dark:active  {
+    background-color: var(--btn-nav-bg-dark-active);
 }
 
 .input-nav-search {
     height: 40px;
-    border: 1px solid black;
+    border: var(--btn-bordr);
 }
 
-.link-nav {
-    color: black;
-    padding: 2px 5px;
-    font-size: 24px;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid rgba(0, 0, 0, 0);
-    transition: .15s;
-    -webkit-transition: .15s;
-    -ms-transition: .15s; 
-   
+.input-nav-search-dark {
+    background-color: var(--bg-dark);
+    color: white;
+    height: 40px;
+    border: 1px solid rgb(99, 99, 99);
 }
 
-.link-nav-active-page, .link-nav:hover{
-    background-color: rgb(245, 247, 247);
-    border: 1px solid rgba(0, 0, 0, 1);
-}
-
-.link-nav:hover:active{
-    background-color: rgb(240, 238, 238);
-    border: 1px solid rgba(0, 0, 0, 1);
-
-}
 
 .icon-nav{
     max-width: 35px;
@@ -76,11 +100,30 @@
     -ms-transition: .15s; 
 }
 
-.icon-nav-active-page img, .icon-nav:hover img{
+.icon-nav.dark{
+    filter: brightness(0) invert(0.3);
+}
+
+.icon-nav.page.light, .icon-nav.light:hover{
+    filter: brightness(0) invert(8);
+}
+
+.icon-nav.light:active{
     filter: brightness(0) invert(1);
 }
 
+.icon-nav.page.dark , .icon-nav.dark:hover{
+    filter: brightness(0) invert(0.7);
+}
+
+.icon-nav.dark:active{
+    filter: brightness(0) invert(0.8);
+}
+
 .cart-count-nav{
+    position: absolute;
+    bottom: -2px;
+    right: 2px;
     background-color: rgb(0, 154, 110);
     text-align: center;
     padding-bottom: 5px;
@@ -100,10 +143,16 @@
 
 .search-list{
     background-color: white;
-    border: 1px solid black;
+    border: var(--btn-bordr);
     position: absolute;
     top:  40px;
     width: 100%;
+    z-index: 200;
+}
+
+.search-list.dark{
+    background-color: var(--bg-dark);
+    border: var(--input-border-focus);
 }
 
 .search-list-item{
@@ -116,7 +165,7 @@
 }
 
 .search-list-item:hover{
-    background-color: rgb(171, 226, 120);
+    background-color: var(--list-item-bg-hover);
 }
 
 .search-list-item p{
@@ -132,5 +181,9 @@
 }
 
 .navbar-toggler:focus{
+    box-shadow: 0 0 0 1px;
+}
+
+.navbar-switch:focus{
     box-shadow: 0 0 0 1px;
 }
