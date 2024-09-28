@@ -11,7 +11,10 @@ const OrderDetails = ({ order }: Prop) => {
   return (
     <>
       <div className="mt-4 mb-2 px-3 mx-auto" style={{ maxWidth: "500px" }}>
-        <div className={`card ${isDark ? "dark" : "light"} p-4 w-100`}>
+        <div
+          className={`card p-4 w-100`}
+          data-bs-theme={isDark ? "dark" : "light"}
+        >
           <h2>{order.date}</h2>
           <br />
           <ul>

@@ -13,9 +13,8 @@ const NavbarButton = ({ title, route }: Prop) => {
     <NavLink to={route} className="my-2 my-md-0  ms-3 ms-md-0">
       {({ isActive }) => (
         <button
-          className={`rounded-0 custome-btn-nav ${isDark ? "dark" : "light"}  ${
-            isActive && "active"
-          }`}
+          className={`rounded-0 custome-btn-nav ${isActive && "active"}`}
+          data-bs-theme={isDark ? "dark" : "light"}
         >
           {title}
         </button>

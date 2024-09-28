@@ -49,9 +49,9 @@ const CartShippingForm = ({
 
   return (
     <div
-      className={`card ${isDark ? "dark" : "light"} p-3 my-5 mx-auto`}
+      className={`card p-3 my-5 mx-auto`}
+      data-bs-theme={isDark ? "dark" : "light"}
       style={{ maxWidth: "400px" }}
-      data-bs-theme={`${isDark ? "dark" : "light"}`}
     >
       <Form
         className="mx-auto"

@@ -18,7 +18,7 @@ const ProductFilterPopup = ({ showPopup, updatePopupState }: Prop) => {
             className="filter-popup-content  mx-auto"
             style={{ width: "400px" }}
           >
-            <Card className={`${isDark ? "dark" : "light"}`}>
+            <Card data-bs-theme={isDark ? "dark" : "light"}>
               <div className="d-flex justify-content-end m-3">
                 <Button className="btn-danger" onClick={updatePopupState}>
                   X

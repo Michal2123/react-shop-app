@@ -13,7 +13,6 @@ const NavigationBar = () => {
   const { isDark } = useContext(ThemeContext);
   return (
     <Navbar
-      data-bs-theme={`${isDark ? "dark" : "light"}`}
       variant={`${isDark ? "dark" : "light"}`}
       expand={"md"}
       className="justify-content-between navbar-expand-lg shadow-sm q 

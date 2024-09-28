@@ -38,7 +38,7 @@ const ValidateFormInput = ({
         </div>
         <Form.Control
           name={name}
-          className={className}
+          className={`${className} ${isDark ? "dark" : "light"}`}
           type={type}
           placeholder={placeholder}
           value={value}

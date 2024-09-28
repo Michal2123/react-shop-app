@@ -21,7 +21,7 @@
     color: rgb(243, 243, 243);
 }
 
-.card.dark{
+.card[data-bs-theme='dark']{
     background-color: rgb(48, 48, 48);
     color: rgb(243, 243, 243);
 }

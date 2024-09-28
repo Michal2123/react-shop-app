@@ -44,6 +44,7 @@
 }
 
 .input-form{
+    background-color:rgb(255, 255, 243);;
     border:none;
     cursor: pointer;
     border: 1px solid transparent;
@@ -53,7 +54,11 @@
     -ms-transition: .15s; 
 }
 
-.input-label.dark{
+.input-form.dark{
+    background-color: rgb(24, 24, 24);
+}
+
+.input-label[data-theme="dark"]{
     color: var(--color-dark);
 }
 

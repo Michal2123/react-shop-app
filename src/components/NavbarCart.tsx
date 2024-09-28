@@ -21,9 +21,8 @@ const NavbarCart = () => {
               style={{ maxWidth: "35px" }}
             >
               <Image
-                className={`icon-nav ${isDark ? "dark" : "light"} ${
-                  isActive && "page"
-                }`}
+                className={`icon-nav ${isActive && "page"}`}
+                data-bs-theme={isDark ? "dark" : "light"}
                 src={cartIcon}
                 fluid
                 style={{ minWidth: "30px" }}

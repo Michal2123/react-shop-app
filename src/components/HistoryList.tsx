@@ -11,7 +11,10 @@ const HistoryList = ({ paginateList }: Prop) => {
   const { isDark } = useContext(ThemeContext);
   return (
     <div className="d-flex justify-content-center mt-4">
-      <div className={`card ${isDark ? "dark" : "light"} p-4 w-75`}>
+      <div
+        className={`card p-4 w-75`}
+        data-bs-theme={isDark ? "dark" : "light"}
+      >
         {paginateList.map((item, index) => (
           <Order
             key={item.id}

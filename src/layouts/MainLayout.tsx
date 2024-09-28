@@ -8,6 +8,7 @@ const MainLayout = () => {
   const { isDark } = useContext(ThemeContext);
   return (
     <div
+      data-bs-theme={`${isDark ? "dark" : "light"}`}
       className={`main-layout-container ${
         isDark ? "dark-theme" : "light-theme"
       } `}

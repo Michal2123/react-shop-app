@@ -14,7 +14,7 @@ const NavbarSearchDropdown = ({ searchList }: Prop) => {
 
   return (
     <>
-      <div className={`search-list ${isDark ? "dark" : "light"}`}>
+      <div className="search-list" data-bs-theme={isDark ? "dark" : "light"}>
         {searchList
           .map((product) => (
             <div

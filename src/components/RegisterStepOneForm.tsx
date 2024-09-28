@@ -35,10 +35,7 @@ const RegisterStepOneForm = ({
   }
 
   return (
-    <div
-      className={`card ${isDark ? "dark" : "light"} p-3 my-2`}
-      data-bs-theme={`${isDark ? "dark" : "light"}`}
-    >
+    <div className={`card p-3 my-2`} data-bs-theme={isDark ? "dark" : "light"}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group>
           <h4 style={{ textAlign: "center" }}>Register</h4>

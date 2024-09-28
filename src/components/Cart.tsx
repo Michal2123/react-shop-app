@@ -28,7 +28,10 @@ const Cart = ({ cartList, setStep }: Prop) => {
   }
 
   return (
-    <div className={`card ${isDark ? "dark" : "light"} w-50 mx-auto my-5`}>
+    <div
+      className={`card w-50 mx-auto my-5`}
+      data-bs-theme={isDark ? "dark" : "light"}
+    >
       <div className="card-body row row-col-2 row-col-md-2 row-col-lg-3">
         {cartList.map(({ product, count }) => (
           <CartItem key={product.id} product={product} count={count} />

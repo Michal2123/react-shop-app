@@ -25,7 +25,7 @@
 }
 
 
-.custome-btn-nav.light,.custome-btn-nav.dark{
+.custome-btn-nav{
     min-width: 90px;
     height: 40px;
     background-color: transparent;
@@ -38,45 +38,45 @@
     -ms-transition: .15s
 }
 
-.light{
+.custome-btn-nav[data-bs-theme='light']{
     color: var(--color-light);
 }
 
 
-.dark{
+.custome-btn-nav[data-bs-theme='dark']{
     color: var(--color-dark);
 }
 
 
-.custome-btn-nav.light.active{
+.custome-btn-nav[data-bs-theme='light'].active{
     background-color: var(--btn-bg-light-active-class);
     border: var(--btn-bordr);
 }
 
 
-.custome-btn-nav.light:hover  {
+.custome-btn-nav[data-bs-theme='light']:hover  {
     background-color: var( --btn-bg-light-hover);
     border: var(--btn-bordr);
 
 }
 
-.custome-btn-nav.light:active  {
+.custome-btn-nav[data-bs-theme='light']:active  {
     background-color: var(--btn-bg-light-active);
 }
 
-.custome-btn-nav.dark.active{
+.custome-btn-nav[data-bs-theme='dark'].active{
     background-color: var(--btn-nav-bg-dark-active-class);
     border: var(--btn-bordr);
 }
 
 
-.custome-btn-nav.dark:hover  {
+.custome-btn-nav[data-bs-theme='dark']:hover  {
     background-color: var(--btn-nav-bg-dark-hover);
     border: var(--btn-bordr);
 
 }
 
-.custome-btn-nav.dark:active  {
+.custome-btn-nav[data-bs-theme='dark']:active  {
     background-color: var(--btn-nav-bg-dark-active);
 }
 
@@ -100,23 +100,23 @@
     -ms-transition: .15s; 
 }
 
-.icon-nav.dark{
+.icon-nav[data-bs-theme='dark']{
     filter: brightness(0) invert(0.3);
 }
 
-.icon-nav.page.light, .icon-nav.light:hover{
+.icon-nav.page[data-bs-theme='light'], .icon-nav[data-bs-theme='light']:hover{
     filter: brightness(0) invert(8);
 }
 
-.icon-nav.light:active{
+.icon-nav[data-bs-theme='light']:active{
     filter: brightness(0) invert(1);
 }
 
-.icon-nav.page.dark , .icon-nav.dark:hover{
+.icon-nav.page[data-bs-theme='dark'], .icon-nav[data-bs-theme='dark']:hover{
     filter: brightness(0) invert(0.7);
 }
 
-.icon-nav.dark:active{
+.icon-na[data-bs-theme='dark']:active{
     filter: brightness(0) invert(0.8);
 }
 
@@ -150,7 +150,7 @@
     z-index: 200;
 }
 
-.search-list.dark{
+.search-list[data-bs-theme='dark']{
     background-color: var(--bg-dark);
     border: var(--input-border-focus);
 }

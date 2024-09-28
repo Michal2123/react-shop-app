@@ -12,7 +12,10 @@ interface Prop {
 const Product = ({ product }: Prop) => {
   const { isDark } = useContext(ThemeContext);
   return (
-    <div className={`card ${isDark ? "dark" : "light"} shadow-sm mx-3 my-2`}>
+    <div
+      className={`card shadow-sm mx-3 my-2`}
+      data-bs-theme={isDark ? "dark" : "light"}
+    >
       <div className="row g-0 align-items-center">
         <div className="col-md">
           <img

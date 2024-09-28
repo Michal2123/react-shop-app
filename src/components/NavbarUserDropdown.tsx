@@ -12,10 +12,11 @@ const NavbarUserDropdown = () => {
   return (
     <>
       {user ? (
-        <div className={`p-0 pt-1 mx-3 my-2 my-md-0`}>
+        <div className="p-0 pt-1 mx-3 my-2 my-md-0">
           <CustomeDropdown>
             <Image
-              className={`icon-nav  ${isDark ? "dark" : "light"}`}
+              className="icon-nav"
+              data-bs-theme={isDark ? "dark" : "light"}
               src={userIcon}
               fluid
               style={{ minWidth: "30px" }}
