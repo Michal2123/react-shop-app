@@ -1,0 +1,72 @@
+:root{
+    --color-light: #212529;
+    --nav-link-light-border: 1px solid rgba(0, 0, 0, 1);
+    --color-dark: rgb(97, 97, 97);
+    --nav-link-dark-border:1px solid rgb(97, 97, 97);
+    --input-border-focus: 1px solid rgb(158, 197, 254);
+}
+
+.nav-link{
+    font-size: 22px;
+    font-weight: 500;
+    max-width:300px;
+    transition: .15s;
+    -webkit-transition: .15s;
+    -ms-transition: .15s; 
+}
+
+.nav-link[data-theme="dark"]{
+    color: var(--color-dark);
+}
+
+.nav-link[data-theme="light"]{
+    color: var(--color-light);
+}
+
+.nav-link[data-theme="light"]:hover{
+    color: var(--color-light);
+    border: var(--nav-link-light-border);
+}
+
+.nav-link[data-theme="light"].active{ 
+    color: var(--color-light);
+    border: var(--nav-link-light-border);
+}
+
+.nav-link[data-theme="dark"]:hover{
+    color: var(--color-dark);
+    border: var(--nav-link-dark-border);
+}
+
+.nav-link[data-theme="dark"].active{ 
+    color: var(--color-dark);
+    border: var(--nav-link-dark-border);
+}
+
+.input-form{
+    background-color:rgb(255, 255, 243);;
+    border:none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 0;
+    transition: .15s;
+    -webkit-transition: .15s;
+    -ms-transition: .15s; 
+}
+
+.input-form.dark{
+    background-color: rgb(24, 24, 24);
+}
+
+.input-label[data-theme="dark"]{
+    color: var(--color-dark);
+}
+
+.input-form:focus{
+    border: var(--input-border-focus);
+    border-radius: 0;
+    box-shadow: none;
+    cursor: auto;
+}
+
+

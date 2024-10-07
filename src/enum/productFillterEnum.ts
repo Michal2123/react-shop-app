@@ -1,0 +1,11 @@
+export enum ProductCategoryKind {
+  VEGETABLES = "VEGETABLES",
+  FRUITS = "FRUITS",
+  SEEDS = "SEEDS",
+  NUTS = "NUTS",
+}
+
+export enum FilterActionKind {
+  CHANGEPRICERANGE = "CHANGEPRICERANGE",
+  CHANGEFILTERCHECK = "CHANGEFILTERCHECK",
+}

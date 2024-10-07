@@ -1,0 +1,93 @@
+import { Button, Form } from "react-bootstrap";
+import ValidateFormInput from "../customes/ValidateFormInput";
+import { useState } from "react";
+import { UpdatePassword } from "../../service/ProfileService";
+import { IUser } from "../../interfaces/AuthenticationInterface";
+import { useError } from "../providers/ErrorProvider";
+
+interface Prop {
+  user: IUser;
+}
+
+const ProfilePasswordTab = ({ user }: Prop) => {
+  const { clearErrorMessage, handleError } = useError();
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      setIsLoading(true);
+      UpdatePassword(password, user.id)
+        .then((response) => {
+          clearErrorMessage();
+          if (!response.ok) {
+            throw new Error(`${response.status}`);
+          }
+          alert("Password has been updated.");
+          setPassword("");
+          setRepeatPassword("");
+          setValidated(false);
+        })
+        .catch((error: Error) => {
+          clearErrorMessage();
+          handleError(error.message, "Unable to update passowrd.");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    setValidated(true);
+  }
+  return (
+    <div className="mx-3">
+      <Form
+        data-testid="profile-change-password-form"
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <ValidateFormInput
+          className="shadow-none rounded-0 input-nav-search"
+          name="password"
+          placeholder="Enter password"
+          type="password"
+          label="Password"
+          value={password}
+          invalidMessage="Please enter password."
+          onChange={(_, v) => setPassword(v)}
+        />
+        <ValidateFormInput
+          className="shadow-none rounded-0 input-nav-search"
+          name="Repeat Password Input"
+          placeholder="Repeat password"
+          type="password"
+          label="Repeat password"
+          value={repeatPassword}
+          invalidMessage="Password and repeated password must be the same."
+          pattern={password}
+          isInvalid={validated && password !== repeatPassword}
+          onChange={(_, v) => setRepeatPassword(v)}
+        />
+        <div className="d-flex justify-content-end">
+          <Button
+            name="Save"
+            variant="primary"
+            type="submit"
+            disabled={isLoading || (password === "" && repeatPassword === "")}
+          >
+            Save
+          </Button>
+        </div>
+      </Form>
+    </div>
+  );
+};
+
+export default ProfilePasswordTab;

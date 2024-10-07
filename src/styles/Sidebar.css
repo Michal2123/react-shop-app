@@ -1,0 +1,31 @@
+.sidebar-ligth{
+    background-color: rgb(224, 225, 191);
+    border: 1px solid rgb(190, 190, 190);
+    z-index: 0;
+}
+
+.sidebar-dark{
+    background-color: rgb(24, 24, 24);
+    border-right: 1px solid rgb(190, 190, 190);
+    z-index: 0;
+    color: white;
+}
+
+.products-layout-content{
+    margin-left: clamp(80px, 15%, 200px);
+}
+
+.side-bar{
+    max-width: 200px;
+    min-width: 75px;
+    width: 15%;
+}
+
+@media screen and (max-width: 950px) {
+    .side-bar{
+        display: none;
+    }
+    .products-layout-content{
+        margin-left: 0;
+    }
+}
