@@ -12,12 +12,12 @@ import ProductPage from "./pages/ProductPage";
 import ProductsLayout from "./layouts/ProductsLayout";
 import SignInPage from "./pages/SignInPage";
 import RegisterPage from "./pages/RegisterPage";
-import ProtectedRout from "./components/ProtectedRout";
-import RestrictedRout from "./components/RestrictedRout";
+import ProtectedRout from "./components/routes/ProtectedRout";
+import RestrictedRout from "./components/routes/RestrictedRout";
 import OrderHistoryPage from "./pages/OrderHistoryPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrderPage from "./pages/OrderPage";
-import MainLayoutProviders from "./components/MainLayoutProviders";
+import MainLayoutProviders from "./components/providers/MainLayoutProviders";
 
 function App() {
   const router = createBrowserRouter(

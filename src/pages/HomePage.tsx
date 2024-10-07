@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/utlis/Carousel";
 import { ProductContext } from "../context/ProductContext";
 
 const HomePage = () => {

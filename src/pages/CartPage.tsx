@@ -1,30 +1,39 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import Cart from "../components/Cart";
-import CartShippingForm from "../components/CartShippingForm";
+
 import { IShippingDetails } from "../interfaces/ProfileInterface";
-import CartOrderPreview from "../components/CartOrderPreview";
+import CartOrderPreview from "../components/cart/CartOrderPreview";
 import { AuthContext } from "../context/AuthenticationContext";
+import Cart from "../components/cart/Cart";
+import CartShippingForm from "../components/cart/CartShippingForm";
 
 function InitShippingDetails(): IShippingDetails {
   const { user } = useContext(AuthContext);
   if (user) {
-    return user;
+    return {
+      ...user,
+    };
   }
-  const initObj: IShippingDetails = {
+  return {
     firstName: "",
     lastName: "",
     city: "",
     zipCode: "",
     address: "",
   };
-  return initObj;
 }
 
 const CartPage = () => {
+  const { user } = useContext(AuthContext);
   const [step, setStep] = useState(1);
-  const [shippingDetiles, setShippingDetiles] = useState(InitShippingDetails());
   const { cartList } = useContext(CartContext);
+  const [shippingDetails, setshippingDetails] = useState<IShippingDetails>(
+    InitShippingDetails()
+  );
+
+  function updateShippingDetails(details: IShippingDetails) {
+    setshippingDetails({ ...details });
+  }
 
   function renderSteps() {
     switch (step) {
@@ -35,8 +44,7 @@ const CartPage = () => {
         return (
           <CartShippingForm
             setStep={setStep}
-            setShippingDetiles={setShippingDetiles}
-            shippingDetails={shippingDetiles}
+            updateShippingDetails={updateShippingDetails}
           />
         );
 
@@ -44,7 +52,8 @@ const CartPage = () => {
         return (
           <CartOrderPreview
             cartList={cartList}
-            shippingDetails={shippingDetiles}
+            shippingDetails={shippingDetails}
+            user={user}
           />
         );
 

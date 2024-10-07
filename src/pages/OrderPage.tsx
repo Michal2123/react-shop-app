@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { HistoryContext } from "../context/HostoryContext";
 import { useParams } from "react-router-dom";
-import OrderDetails from "../components/OrderDetails";
+import OrderDetails from "../components/orderHistory/OrderDetails";
 
 const OrderPage = () => {
   const { history } = useContext(HistoryContext);

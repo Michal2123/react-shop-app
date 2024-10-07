@@ -1,4 +1,4 @@
-import OrderHistory from "../components/OrderHistory";
+import OrderHistory from "../components/orderHistory/OrderHistory";
 
 const OrderHistoryPage = () => {
   return <OrderHistory />;

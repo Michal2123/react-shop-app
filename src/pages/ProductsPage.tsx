@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import Products from "../components/Products";
 import {
   UpdateProductContext,
   ProductContext,
 } from "../context/ProductContext";
+import Products from "../components/product/Products";
 
 const ProductsPage = () => {
   const { productList } = useContext(ProductContext);

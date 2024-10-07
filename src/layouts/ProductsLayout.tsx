@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
-import ProductFilterPopup from "../components/ProductFilterPopup";
-import FloatingFilterButton from "../components/FloatingFilterButton";
-import ProductFilterProvider from "../components/ProductFilterProvider";
+import FloatingFilterButton from "../components/sidebar/FloatingFilterButton";
 import { useState } from "react";
+import ProductFilterProvider from "../components/providers/ProductFilterProvider";
+import Sidebar from "../components/sidebar/Sidebar";
+import ProductFilterPopup from "../components/product/ProductFilterPopup";
 
 const ProductsLayout = () => {
   const [showPopup, setShowPopup] = useState(false);
