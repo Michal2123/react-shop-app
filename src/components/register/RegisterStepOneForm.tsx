@@ -25,7 +25,7 @@ const RegisterStepOneForm = ({
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const form = e.currentTarget;
 
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
       e.preventDefault();
       e.stopPropagation();
     } else {

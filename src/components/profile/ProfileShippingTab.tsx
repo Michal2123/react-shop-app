@@ -1,28 +1,25 @@
 import { IShippingDetails } from "../../interfaces/ProfileInterface";
-import { UpdateShippingDetails } from "../../service/ProfileService";
 import { IUser } from "../../interfaces/AuthenticationInterface";
 import { useContext, useState } from "react";
-import { UpdateAuthContext } from "../../context/AuthenticationContext";
 import ShippingDetailForm from "../utlis/ShippingDetailForm";
 import { useError } from "../providers/ErrorProvider";
+import { UpdateAuthContext } from "../../context/AuthenticationContext";
+import { UpdateShippingDetails } from "../../service/ProfileService";
 
 interface Prop {
   user: IUser;
 }
 
 const ProfileShippingTab = ({ user }: Prop) => {
-  const { updateUser } = useContext(UpdateAuthContext);
   const { clearErrorMessage, handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
 
+  const { updateUser } = useContext(UpdateAuthContext);
+
   function handleSubmit(shippingDetails: IShippingDetails) {
     setIsLoading(true);
-    UpdateShippingDetails(shippingDetails, user.id)
-      .then((response) => {
-        clearErrorMessage();
-        if (!response.ok) {
-          throw new Error(`${response.status}`);
-        }
+    UpdateShippingDetails(shippingDetails)
+      .then((_) => {
         alert("Shipping details has been updated.");
         updateUser({
           ...user,
@@ -41,6 +38,7 @@ const ProfileShippingTab = ({ user }: Prop) => {
   return (
     <div className="mx-3">
       <ShippingDetailForm
+        title="Shipping Details"
         buttonText="Save"
         isLoading={isLoading}
         user={user}

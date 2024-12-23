@@ -6,16 +6,13 @@ export interface IGetHistoryItem {
 }
 
 export interface IPostHistoryItem {
-  userId: string;
   orderList: IOrderItem[];
   date: string;
 }
 
 export interface IOrderItem {
   productId: string;
-  name: string;
   count: number;
-  price: number;
 }
 
 export interface IHistoryContext {
@@ -24,5 +21,5 @@ export interface IHistoryContext {
 
 export interface IUpdateHistoryContext {
   updateHistory: (arg: IGetHistoryItem[]) => void;
-  getUserHistory: (arg: string) => void;
+  getUserHistory: () => void;
 }

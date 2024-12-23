@@ -1,6 +1,5 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { IGetHistoryItem } from "../../interfaces/HistoryInterface";
-import { AuthContext } from "../../context/AuthenticationContext";
 import { GetOrderHistory } from "../../service/HistoryService";
 import {
   HistoryContext,
@@ -20,11 +19,10 @@ const HistoryProvider = ({ children }: Prop) => {
   const [history, setHistory] = useState<IGetHistoryItem[]>(
     getInitialHistoryState()
   );
-  const { user } = useContext(AuthContext);
   useEffect(() => {
     let didFetch = false;
-    if (!history.length && !didFetch && user) {
-      getUserHistory(user.id);
+    if (!history.length && !didFetch) {
+      getUserHistory();
     }
     return () => {
       didFetch = true;
@@ -36,8 +34,8 @@ const HistoryProvider = ({ children }: Prop) => {
     setHistory(data);
   }
 
-  function getUserHistory(userId: string) {
-    GetOrderHistory(userId)
+  function getUserHistory() {
+    GetOrderHistory()
       .then((data) => {
         updateHistory(data);
       })

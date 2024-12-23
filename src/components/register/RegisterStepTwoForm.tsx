@@ -1,24 +1,25 @@
 import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
-import { UpdateAuthContext } from "../../context/AuthenticationContext";
-import { Register } from "../../service/RegisterService";
 import { IRegisterData } from "../../interfaces/RegisterInterface";
 import { ThemeContext } from "../../context/ThemeContext";
 import ShippingDetailForm from "../utlis/ShippingDetailForm";
 import { IShippingDetails } from "../../interfaces/ProfileInterface";
 import { useError } from "../providers/ErrorProvider";
+import { UpdateAuthContext } from "../../context/AuthenticationContext";
+import { Register } from "../../service/RegisterService";
 
 interface Prop {
   registerData: IRegisterData;
 }
 
 const RegisterStepTwoForm = ({ registerData }: Prop) => {
-  const { logIn } = useContext(UpdateAuthContext);
   const { isDark } = useContext(ThemeContext);
   const [isLoading, setIsLoading] = useState(false);
   const { clearErrorMessage, handleError } = useError();
   const navigate = useNavigate();
+
+  const { logIn } = useContext(UpdateAuthContext);
 
   function handleSubmit(shippingdetails: IShippingDetails) {
     registerData = {
@@ -27,12 +28,17 @@ const RegisterStepTwoForm = ({ registerData }: Prop) => {
     };
     setIsLoading(true);
     Register(registerData)
-      .then((data) => {
-        clearErrorMessage();
-        logIn(data);
+      .then((token) => {
+        logIn({
+          accessToken: token,
+          user: {
+            ...registerData,
+          },
+        });
         navigate("/");
       })
       .catch((error: Error) => {
+        clearErrorMessage();
         handleError(error.message, "Unable to register.");
       })
       .finally(() => {
@@ -43,6 +49,7 @@ const RegisterStepTwoForm = ({ registerData }: Prop) => {
   return (
     <div className={`card p-3 my-2`} data-bs-theme={isDark ? "dark" : "light"}>
       <ShippingDetailForm
+        title="Register"
         handleSubmit={handleSubmit}
         isLoading={isLoading}
         buttonText="Register"

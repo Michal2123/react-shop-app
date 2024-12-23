@@ -2,17 +2,13 @@ import { useContext, useState } from "react";
 import { ICartItem } from "../../interfaces/CartInteraface";
 import { IShippingDetails } from "../../interfaces/ProfileInterface";
 import { Button } from "react-bootstrap";
-import { PostOrderToHistory } from "../../service/HistoryService";
-import { IGetHistoryItem, IOrderItem } from "../../interfaces/HistoryInterface";
-import {
-  HistoryContext,
-  UpdateHistoryContext,
-} from "../../context/HostoryContext";
 import { useNavigate } from "react-router-dom";
 import { UpdateCartContext } from "../../context/CartContext";
 import { CartActionKind } from "../../enum/CartEnum";
-import { GetDateString } from "../../utlis/Date";
 import { IUser } from "../../interfaces/AuthenticationInterface";
+import { IOrderItem } from "../../interfaces/HistoryInterface";
+import { PostOrderToHistory } from "../../service/HistoryService";
+import { GetDateString } from "../../utlis/Date";
 
 interface Prop {
   cartList: ICartItem[];
@@ -22,8 +18,6 @@ interface Prop {
 
 const CartOrderPreview = ({ cartList, shippingDetails, user }: Prop) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { history } = useContext(HistoryContext);
-  const { updateHistory } = useContext(UpdateHistoryContext);
   const { dispatch } = useContext(UpdateCartContext);
 
   const { firstName, lastName, city, zipCode, address } = shippingDetails;
@@ -31,37 +25,31 @@ const CartOrderPreview = ({ cartList, shippingDetails, user }: Prop) => {
   const navigator = useNavigate();
 
   function handleSubmit() {
+    if (!user) {
+      onSuccess();
+      return;
+    }
+    setIsLoading(true);
     const orderList = cartList.map(({ product, count }) => {
       const temp: IOrderItem = {
-        productId: String(product.id),
-        name: product.name,
-        price: product.price,
+        productId: product.id,
         count: count,
       };
       return temp;
     });
-    if (user) {
-      setIsLoading(true);
-      PostOrderToHistory({
-        userId: user.id,
-        date: GetDateString(),
-        orderList,
+    PostOrderToHistory({
+      date: GetDateString(),
+      orderList,
+    })
+      .then((_) => {
+        onSuccess();
       })
-        .then((response) => response.json())
-        .then((data: IGetHistoryItem) => {
-          updateHistory([...history, data]);
-          onSuccess();
-        })
-        .catch((error: Error) => {
-          console.log(error);
-          return;
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-      return;
-    }
-    onSuccess();
+      .catch((error) => {
+        throw error;
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function onSuccess() {

@@ -1,62 +1,20 @@
 import { ApiEndopnts, ConnectionPath } from "../enum/ConnectionEnum";
 import { IShippingDetails } from "../interfaces/ProfileInterface";
+import { getToken } from "../utlis/token";
 
+//Functon connect to PATCH user endpoint and update user shipping data
 export async function UpdateShippingDetails(
-  shippingDetails: IShippingDetails,
-  userId: string
+  shippingDetails: IShippingDetails
 ): Promise<Response> {
-  const token = localStorage.getItem("token")?.replace(/['"]+/g, "");
-  return await fetch(
-    `${ConnectionPath.API}/640${ApiEndopnts.USERS}/${userId}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...shippingDetails,
-      }),
-    }
-  );
-}
-
-export async function UpdateEmail(
-  email: string,
-  userId: string
-): Promise<Response> {
-  const token = localStorage.getItem("token")?.replace(/['"]+/g, "");
-  return await fetch(
-    `${ConnectionPath.API}/640${ApiEndopnts.USERS}/${userId}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-      }),
-    }
-  );
-}
-
-export async function UpdatePassword(
-  password: string,
-  userId: string
-): Promise<Response> {
-  const token = localStorage.getItem("token")?.replace(/['"]+/g, "");
-  return await fetch(
-    `${ConnectionPath.API}/640${ApiEndopnts.USERS}/${userId}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password,
-      }),
-    }
-  );
+  const token = getToken();
+  return await fetch(`${ConnectionPath.API}${ApiEndopnts.USERS}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...shippingDetails,
+    }),
+  });
 }
