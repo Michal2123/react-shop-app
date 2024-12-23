@@ -1,11 +1,12 @@
 import { ApiEndopnts, ConnectionPath } from "../enum/ConnectionEnum";
 import { IAuthData } from "../interfaces/AuthenticationInterface";
 
+// Function connect to POST auth login endopint, return user data and token
 export async function SignIn(
   email: string,
   password: string
 ): Promise<IAuthData> {
-  return fetch(`${ConnectionPath.API}${ApiEndopnts.SIGNIN}`, {
+  return await fetch(`${ConnectionPath.API}${ApiEndopnts.SIGNIN}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,14 +16,11 @@ export async function SignIn(
       password,
     }),
   })
-    .then((response) => {
-      if (!response.ok) {
-        if (response.status === 400) {
-          throw new Error("Wrong email or password.");
-        }
-        throw new Error("Unable to login.");
-      }
-      return response.json();
+    .then(async (response) => {
+      const data: IAuthData = await response.json();
+      return data;
     })
-    .then((data: IAuthData) => data);
+    .catch((error: Error) => {
+      throw new Error(error.message);
+    });
 }

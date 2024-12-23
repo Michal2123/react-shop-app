@@ -1,10 +1,8 @@
 import { ApiEndopnts, ConnectionPath } from "../enum/ConnectionEnum";
-import { IAuthData } from "../interfaces/AuthenticationInterface";
 import { IRegisterData } from "../interfaces/RegisterInterface";
 
-export async function Register(
-  registerData: IRegisterData
-): Promise<IAuthData> {
+// Function connect to POST auth regiser endpoint, create new account and user
+export async function Register(registerData: IRegisterData): Promise<string> {
   return await fetch(`${ConnectionPath.API}${ApiEndopnts.REGISTER}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -13,5 +11,5 @@ export async function Register(
     }),
   })
     .then((response) => response.json())
-    .then((data: IAuthData) => data);
+    .then((token: string) => token);
 }

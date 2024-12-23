@@ -1,11 +1,11 @@
 export enum ConnectionPath {
-  API = "http://localhost:3001",
+  API = "https://shop-api-0ae79420bba5.herokuapp.com/",
 }
 
 export enum ApiEndopnts {
-  PRODUCTS = "/products",
-  USERS = "/users",
-  HISTORY = "/history",
-  REGISTER = "/REGISTER",
-  SIGNIN = "/SIGNIN",
+  PRODUCTS = "product",
+  USERS = "user",
+  HISTORY = "history",
+  REGISTER = "auth/register",
+  SIGNIN = "auth/login",
 }

@@ -1,6 +1,8 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IGetHistoryItem } from "../../interfaces/HistoryInterface";
+import { useContext } from "react";
+import { ProductContext } from "../../context/ProductContext";
 
 interface Prop {
   order: IGetHistoryItem;
@@ -9,16 +11,18 @@ interface Prop {
 
 const Order = ({ order, isLast }: Prop) => {
   const maxVisibleProducts = 10;
+  const { productList } = useContext(ProductContext);
   return (
     <>
       <div>
         {order.date}
         <br />
         {order.orderList
-          .map(({ name, count, productId }, index) => (
+          .map(({ count, productId }, index) => (
             <div key={productId} className="d-inline">
               <p className="d-inline">
-                {name} x {count}
+                {productList.find((product) => product.id === productId)?.name}{" "}
+                x {count}
                 {index < maxVisibleProducts - 1 &&
                 index !== order.orderList.length - 1
                   ? ", "
@@ -41,7 +45,11 @@ const Order = ({ order, isLast }: Prop) => {
           >
             Total:{" "}
             {order.orderList.reduce(
-              (sumValue, order) => sumValue + order.count * order.price,
+              (sumValue, order) =>
+                sumValue +
+                order.count *
+                  (productList.find((product) => product.id === order.productId)
+                    ?.price ?? 0),
               0
             )}{" "}
             $

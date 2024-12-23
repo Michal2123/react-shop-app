@@ -3,13 +3,15 @@ import {
   IGetHistoryItem,
   IPostHistoryItem,
 } from "../interfaces/HistoryInterface";
+import { getToken } from "../utlis/token";
 
-export async function GetOrderHistory(
-  userId: String
-): Promise<IGetHistoryItem[]> {
-  return await fetch(
-    `${ConnectionPath.API}${ApiEndopnts.HISTORY}?userId=${userId}`
-  )
+// Function fetch list of all user order history
+export async function GetOrderHistory(): Promise<IGetHistoryItem[]> {
+  const token = getToken();
+  return await fetch(`${ConnectionPath.API}${ApiEndopnts.HISTORY}`, {
+    method: "GET",
+    headers: { Authorization: `${token}` },
+  })
     .then((response) => {
       if (!response.ok) {
         throw Error("Unable to get products");
@@ -21,12 +23,14 @@ export async function GetOrderHistory(
     });
 }
 
+// Function POSt new order to user order history
 export async function PostOrderToHistory(
   order: IPostHistoryItem
 ): Promise<Response> {
+  const token = getToken();
   return fetch(`${ConnectionPath.API}${ApiEndopnts.HISTORY}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: `${token}` },
     body: JSON.stringify({
       ...order,
     }),

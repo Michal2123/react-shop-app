@@ -2,15 +2,14 @@ import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import ValidateFormInput from "../customes/ValidateFormInput";
-import { UpdateAuthContext } from "../../context/AuthenticationContext";
-import { SignIn } from "../../service/SignInService";
-import { UpdateHistoryContext } from "../../context/HostoryContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useError } from "../providers/ErrorProvider";
+import { UpdateAuthContext } from "../../context/AuthenticationContext";
+import { UpdateHistoryContext } from "../../context/HostoryContext";
+import { SignIn } from "../../service/SignInService";
+import { IAuthData } from "../../interfaces/AuthenticationInterface";
 
 const SignInForm = () => {
-  const { logIn } = useContext(UpdateAuthContext);
-  const { getUserHistory } = useContext(UpdateHistoryContext);
   const { isDark } = useContext(ThemeContext);
   const { errorMessage, clearErrorMessage, handleError } = useError();
   const [isLoading, setIsLoading] = useState(false);
@@ -18,31 +17,31 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { logIn } = useContext(UpdateAuthContext);
+  const { getUserHistory } = useContext(UpdateHistoryContext);
+
   const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     const form = e.currentTarget;
     e.preventDefault();
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
       e.stopPropagation();
     } else {
       SignIn(email, password)
-        .then((data) => {
-          clearErrorMessage();
+        .then((data: IAuthData) => {
           logIn(data);
-          getUserHistory(data.user.id);
+          getUserHistory();
           navigate("/");
         })
         .catch((error: Error) => {
           clearErrorMessage();
           handleError("", error.message);
         })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+        .finally(() => setIsLoading(false));
 
-    setValidated(true);
+      setValidated(true);
+    }
   }
 
   return (

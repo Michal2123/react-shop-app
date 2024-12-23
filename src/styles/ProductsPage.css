@@ -40,6 +40,22 @@
     margin-top: 150px;
 }
 
+.buy-popup-info{
+    background-color: white;
+    width: 125px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 0.375rem;
+    left: 50%;
+}
+
+
+@media screen and (max-width: 767px) {
+    .buy-popup-info{
+        left: 100%;
+    }
+}
+
 @media screen and (min-width: 951px) {
     .filter-floating-button, .filter-popup{
         display: none;

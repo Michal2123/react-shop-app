@@ -1,6 +1,7 @@
 import { ApiEndopnts, ConnectionPath } from "../enum/ConnectionEnum";
 import { IProduct } from "../interfaces/ProductInterface";
 
+// Function fetch list of all products
 export async function GetAllProducts(): Promise<IProduct[]> {
   return await fetch(`${ConnectionPath.API}${ApiEndopnts.PRODUCTS}`)
     .then((response) => response.json())
