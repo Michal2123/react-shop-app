@@ -33,7 +33,7 @@ const Product = ({ product }: Prop) => {
             <p>Category: {product.category}</p>
             <p>Price: {product.price} PLN</p>
             <div className="d-flex justify-content-between">
-              <ProductBuyButton product={product} overlayPlacment="top" />
+              <ProductBuyButton product={product} />
               <Link to={`${product.id}`}>
                 <Button className="btn btn-secondary">Details</Button>
               </Link>

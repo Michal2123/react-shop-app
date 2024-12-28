@@ -16,11 +16,7 @@ const ProductDetail = ({ product }: Prop) => {
         <p className="mt-5 flex-1">{product.describe}</p>
         <div className="d-flex mt-auto mx-3 w-100 align-items-end flex-column">
           <h3>Price: {product.price}$ </h3>
-          <ProductBuyButton
-            product={product}
-            overlayPlacment="left"
-            style={{ width: "150px" }}
-          />
+          <ProductBuyButton product={product} style={{ width: "150px" }} />
         </div>
       </div>
     </div>
