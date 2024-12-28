@@ -1,6 +1,6 @@
 {
   "name": "react-shop-app",
-  "private": true,
+  "private": false,
   "homepage": "https://michal2123.github.io/react-shop-app/",
   "version": "0.0.0",
   "type": "module",
