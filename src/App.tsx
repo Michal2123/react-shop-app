@@ -39,7 +39,8 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
-    )
+    ),
+    { basename: "/react-shop-app/" }
   );
   return (
     <MainLayoutProviders>
