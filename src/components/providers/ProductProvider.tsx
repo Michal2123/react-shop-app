@@ -52,7 +52,9 @@ const ProductProvider = ({ children }: Prop) => {
   }
 
   function resetProductList() {
-    setProductList(fechedData);
+    if (fechedData.length) {
+      setProductList(fechedData);
+    }
   }
 
   return (

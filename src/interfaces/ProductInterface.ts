@@ -4,7 +4,7 @@ import {
 } from "../enum/productFillterEnum";
 
 export interface IProduct {
-  id: string;
+  id: number;
   name: string;
   describe: string;
   image: string;

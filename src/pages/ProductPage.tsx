@@ -7,7 +7,7 @@ const ProductPage = () => {
   const { productList } = useContext(ProductContext);
   const { id } = useParams();
 
-  const product = productList.find((product) => product.id === id);
+  const product = productList.find((product) => product.id === parseInt(id!));
 
   return (
     <div className="d-flex justify-content-center">
