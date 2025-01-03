@@ -11,7 +11,7 @@ export interface IPostHistoryItem {
 }
 
 export interface IOrderItem {
-  productId: string;
+  productId: number;
   count: number;
 }
 
