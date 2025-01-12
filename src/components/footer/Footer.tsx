@@ -1,8 +1,16 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+
 const Footer = () => {
+  const { isDark } = useContext(ThemeContext);
   return (
-    <footer className="footer-container">
+    <footer
+      className={`footer-container ${
+        isDark ? "dark-theme-footer" : "light-theme-footer"
+      }`}
+    >
       <div
-        className="row row-col-2 ms-auto my-3 w-50 me-5 mt-2"
+        className="row row-col-2 ms-auto me-auto my-3 w-50 mt-2"
         style={{ maxWidth: "500px" }}
       >
         <h2>Contact</h2>

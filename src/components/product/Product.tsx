@@ -17,14 +17,14 @@ const Product = ({ product }: Prop) => {
       data-bs-theme={isDark ? "dark" : "light"}
     >
       <div className="row g-0 align-items-center">
-        <div className="col-md">
+        <div className="col">
           <img
             className="img-fluid rounded-start "
             src={product.image}
             alt={product.name}
           />
         </div>
-        <div className="col-md">
+        <div className="col">
           <div className="card-body col">
             <h3 className="card-title">
               {product.name}, {product.id}

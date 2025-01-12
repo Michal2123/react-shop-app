@@ -10,7 +10,7 @@ const Profile = () => {
   if (user) {
     return (
       <div
-        className="my-4 ms-3 ms-lg-0"
+        className="my-5 ms-3 ms-lg-0"
         data-bs-theme={`${isDark ? "dark" : "light"}`}
         data-theme={`${isDark ? "dark" : "light"}`}
       >

@@ -1,6 +1,16 @@
+
+
 .footer-container{
     min-height: 150px;
-    background-color: black;
-    color: white;
     z-index: 10;
+}
+
+.dark-theme-footer{
+    background-color: var(--bg-dark);
+    color: var(--color-dark);
+}
+
+.light-theme-footer{
+    background-color: var(--bg-light);
+    color: var(--color-light);
 }

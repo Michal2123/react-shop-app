@@ -20,19 +20,25 @@ const OrderDetails = ({ order, productList }: Prop) => {
           <br />
           <ul>
             {order.orderList.map(({ count, productId }) => (
-              <li key={productId} className="d-inline">
-                <div className="my-2">
-                  <div className="d-inline resp-margin-right">
-                    <h5 className="d-inline">
-                      {
-                        productList.find((product) => product.id === productId)
-                          ?.name
-                      }
-                    </h5>
-                    <p className="d-inline"> x {count}</p>
+              <li key={productId} className="row my-2">
+                <div className="col-12 col-sm-6">
+                  <div className="row">
+                    <div className="col-6">
+                      <h5>
+                        {
+                          productList.find(
+                            (product) => product.id === productId
+                          )?.name
+                        }
+                      </h5>
+                    </div>
+                    <div className="col-6 text-sm-start text-end pe-5 pe-sm-0">
+                      <p> x {count}</p>
+                    </div>
                   </div>
-
-                  <p className="d-inline">
+                </div>
+                <div className="col-12 col-sm-6 text-end pe-4">
+                  <p>
                     {productList.find((product) => product.id === productId)
                       ?.price ?? 0 * count}{" "}
                     $

@@ -6,13 +6,15 @@ import userIcon from "../../assets/icons/user-icon.png";
 import NavbarButton from "./NavbarButton";
 import { ThemeContext } from "../../context/ThemeContext";
 
-const NavbarUserDropdown = () => {
+const NavbarUserDropdown = ({
+  className,
+}: React.HTMLAttributes<HTMLElement>) => {
   const { user } = useContext(AuthContext);
   const { isDark } = useContext(ThemeContext);
   return (
-    <>
-      {user ? (
-        <div className="p-0 pt-1 mx-3 my-2 my-md-0">
+    <div className={className}>
+      <div className="p-0 pt-1 mx-auto my-2 my-md-0">
+        {user ? (
           <CustomeDropdown>
             <Image
               className="icon-nav"
@@ -22,11 +24,11 @@ const NavbarUserDropdown = () => {
               style={{ minWidth: "30px" }}
             />
           </CustomeDropdown>
-        </div>
-      ) : (
-        <NavbarButton title="Sign in" route="/signin" />
-      )}
-    </>
+        ) : (
+          <NavbarButton title="Sign in" route="/signin" />
+        )}
+      </div>
+    </div>
   );
 };
 
