@@ -1,4 +1,4 @@
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { useContext } from "react";
 import { IProduct } from "../../interfaces/ProductInterface";
 import { UpdateCartContext } from "../../context/CartContext";
@@ -28,44 +28,41 @@ const CartItem = ({ product, count }: Prop) => {
 
   return (
     <>
-      <div className="row my-2">
-        <div
-          className="col"
-          style={{
-            maxWidth: "150px",
-            minWidth: "125px",
-          }}
-        >
+      <div className="row my-2 mx-1 align-items-center">
+        <div className="col-12 col-lg-4">
           <Image src={product.image} fluid />
         </div>
-        <div className="col">
+        <div className="col-12 col-lg-6">
           <h5 className="card-title">{product.name}</h5>
           <p className="card-text">{product.describe}</p>
         </div>
-        <div className="col my-auto" style={{ maxWidth: "100px" }}>
-          <div className="d-flex">
-            <p
-              className="d-inline mx-auto my-0 p-0"
+        <div className="col-8 col-sm-6 col-lg-2 mt-3 mt-lg-0 ms-sm-auto ms-lg-0 mx-auto mx-sm-0">
+          <div className="row text-center align-items-center">
+            <Button
+              className="col-3 col-md-4 col-lg-3 btn btn-secondary ms-auto mx-lg-auto my-0 p-0"
+              style={{ maxWidth: "25px" }}
               onClick={handleDecreseClick}
             >
               -
-            </p>
-            <p className="d-inline mx-aut0 my-0 p-0">{count}</p>
-            <p
-              className="d-inline mx-auto my-0 p-0"
+            </Button>
+
+            <p className="col-6 col-md-4 col-lg-6 mx-aut0 my-0 p-0">{count}</p>
+            <Button
+              className="col-3 col-md-4 col-lg-3 btn btn-secondary me-auto mx-lg-auto my-0 p-0"
+              style={{ maxWidth: "25px" }}
               onClick={handleIncreseClick}
             >
               +
-            </p>
+            </Button>
           </div>
           <div className="row">
-            <div
-              className="col"
-              style={{ textAlign: "center" }}
+            <Button
+              className="col-12 mx-auto p-0 mt-2"
+              style={{ maxWidth: "25px" }}
               onClick={handleDeleteClick}
             >
               x
-            </div>
+            </Button>
           </div>
         </div>
       </div>

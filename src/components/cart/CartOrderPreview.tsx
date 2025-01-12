@@ -62,24 +62,30 @@ const CartOrderPreview = ({ cartList, shippingDetails, user }: Prop) => {
 
   return (
     <div className="mt-4 mb-2 mx-auto" style={{ maxWidth: "800px" }}>
-      <div className="w-100 row row-cols-1 row-cols-sm-2">
-        <div className="col">
+      <div className="row">
+        <div className="col-12 col-md-6">
           <br />
           <ul>
             {cartList.map(({ count, product }) => (
-              <li key={product.id} className="d-inline">
-                <div className="my-2">
-                  <div className="d-inline resp-margin-right">
-                    <h5 className="d-inline">{product.name}</h5>
-                    <p className="d-inline"> x {count}</p>
+              <li key={product.id} className="row my-2">
+                <div className="col-12 col-sm-6">
+                  <div className="row">
+                    <div className="col-6">
+                      <h5>{product.name}</h5>
+                    </div>
+                    <div className="col-6 text-sm-start text-end pe-5 pe-sm-0">
+                      <p>x {count}</p>
+                    </div>
                   </div>
-
-                  <p className="d-inline">{product.price * count} $</p>
+                </div>
+                <div className="col-12 col-sm-6 text-end pe-4">
+                  <p>{product.price * count} $</p>
                 </div>
               </li>
             ))}
           </ul>
           <h2
+            className="pe-3 pe-md-0"
             style={{
               textAlign: "end",
             }}
@@ -92,8 +98,8 @@ const CartOrderPreview = ({ cartList, shippingDetails, user }: Prop) => {
             $
           </h2>
         </div>
-        <div className="d-flex flex-column justify-content-center col ps-3">
-          <div className="w-50 mx-auto pt-4">
+        <div className="col-12 col-md-6 ps-5 ps-md-3">
+          <div className="w-50 mx-md-auto pt-4">
             <h5>First name</h5>
             <p>{firstName}</p>
             <h5>Last name</h5>
